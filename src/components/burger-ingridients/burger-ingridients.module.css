@@ -1,0 +1,31 @@
+.section_burger_ingridients {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  height: 100%;
+}
+
+.burger_title {
+  margin-top: 0;
+}
+
+.scrollableContent {
+  overflow-y: auto;
+  max-height: calc(100vh - 300px);
+  padding-right: 8px;
+}
+
+.scrollableContent::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollableContent::-webkit-scrollbar-track {
+  background: #2F2F37;
+}
+
+.scrollableContent::-webkit-scrollbar-thumb {
+  background: #8585AD;
+  border: 3px solid #8585AD;
+  border-radius: 6px;
+}
+

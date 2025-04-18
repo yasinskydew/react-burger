@@ -1,0 +1,47 @@
+.button_text {
+  font-family: var(--font-family);
+  color: var(--text-primary-color);
+  margin: 0;
+}
+
+.button_text_dashed {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--text-primary-color);
+}
+
+
+.customButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  border: none;
+}
+
+.filled {
+  background: linear-gradient(45deg, #801ab2 0%, #4c4cff 100%);  
+}
+
+.dashed {
+  background: transparent;
+}
+
+.small {
+  padding: 5px 12px;
+}
+
+.medium {
+  border-radius: 64px;
+  padding: 16px 20px;
+}
+
+.large {
+  padding: 20px 32px;
+}
+
+.inactive {
+  color: var(--text-inactive-color);
+}

@@ -1,0 +1,33 @@
+.burger_component_section {
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+  gap: 40px;
+}
+.burger_component_section_bottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 40px;
+  align-items: center;
+}
+
+.scrollableContent {
+  overflow-y: auto;
+  max-height: calc(100vh - 300px);
+  padding-right: 8px;
+}
+
+.scrollableContent::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollableContent::-webkit-scrollbar-track {
+  background: #2F2F37;
+}
+
+.scrollableContent::-webkit-scrollbar-thumb {
+  background: #8585AD;
+  border: 3px solid #8585AD;
+  border-radius: 6px;
+}
