@@ -3,3 +3,7 @@
   grid-template-columns: 32px 1fr;
   align-items: center;
 }
+
+.constructor_element {
+  background-color: #1c1c21;
+}

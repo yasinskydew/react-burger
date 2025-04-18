@@ -9,11 +9,11 @@ export default function AppHeader() {
                 <div className={styles.header_buttons}>
                     <Button htmlType="button" size="medium" type="secondary" extraClass={styles.header_button}>
                         <BurgerIcon type="primary" />
-                        Конструктор
+                        <span className={styles.header_button_text}>Конструктор</span>
                     </Button>
                     <Button htmlType="button" size="medium" type="secondary" extraClass={styles.header_button}>
                         <ListIcon type="secondary" />
-                        Лента заказов
+                        <span className={styles.header_button_text_secondary}>Лента заказов</span>
                     </Button>
                 </div>
                 <div className={styles.header_logo}>
@@ -22,7 +22,7 @@ export default function AppHeader() {
                 <div className={styles.header_profile}>
                     <Button htmlType="button" size="medium" type="secondary" extraClass={styles.header_button}>
                         <ProfileIcon type="secondary" />
-                        Личный кабинет
+                        <span className={styles.header_button_text_secondary}>Личный кабинет</span>
                     </Button>
                 </div>
             </div>

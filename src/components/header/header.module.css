@@ -7,8 +7,15 @@
     align-items: center;
     display: flex;
     gap: 8px;
-    color: var(--text-primary-color);
     padding: 16px 20px;
+}
+
+.header_button_text {
+    color: white;
+}
+
+.header_button_text_secondary {
+    color: var(--text-inactive-color);
 }
 
 .container {

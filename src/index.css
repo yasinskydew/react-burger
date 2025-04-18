@@ -1,0 +1,10 @@
+:root {
+  scrollbar-width: thin;
+  scrollbar-color: var(--text-inactive-color) var(--background-element);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--text-inactive-color) var(--background-element);
+}
+

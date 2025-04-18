@@ -28,6 +28,7 @@ export default function BurgerComponent({
           price={price} 
           isLocked={isLocked} 
           type={type as 'top' | 'bottom'}
+          extraClass={styles.constructor_element}
         />
     </article>
   );

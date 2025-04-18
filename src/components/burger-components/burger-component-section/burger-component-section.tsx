@@ -89,7 +89,6 @@ export default function BurgerComponentSection() {
       title: 'Краторная булка N-200i (верх)',
       price: 20,
       isLocked: true,
-      type: 'bottom'
     },
     {
       id: 12,
