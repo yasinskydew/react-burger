@@ -1,25 +1,27 @@
-.burger_component_section {
+.section_burger_ingredients {
   display: flex;
   flex-direction: column;
-  margin-top: 100px;
-  gap: 40px;
+  height: 100%;
 }
-.burger_component_section_bottom {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  gap: 40px;
-  align-items: center;
+
+.burger_title {
+  margin-top: 40px;
+  margin-bottom: 20px;
 }
 
 .scrollableContent {
+  margin-top: 40px;
   overflow-y: auto;
-  max-height: calc(100vh - 350px);
+  max-height: calc(100vh - 300px);
   padding-right: 8px;
 }
 
 .scrollableContent::-webkit-scrollbar {
   width: 8px;
+}
+
+.scrollableContent::-webkit-scrollbar-button {
+  display: none;
 }
 
 .scrollableContent::-webkit-scrollbar-track {
@@ -31,3 +33,4 @@
   border: 3px solid #8585AD;
   border-radius: 6px;
 }
+

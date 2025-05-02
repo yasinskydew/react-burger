@@ -1,12 +1,21 @@
-import BurgerIngridients from '../burger-ingridients/burger-ingridients'
 import styles from './main.module.css'
-import BurgerComponentSection from '../burger-components/burger-component-section/burger-component-section'
+import { IIngredient } from '../../utils/data'
+import { useState } from 'react'
+import BurgerConstructor from '../burgerConstructor/burgerConstructor/burgerConstructor';
+import BurgerIngredients from '../burgerIngredients/burgerIngredients';
 
 export default function Main() {
+
+    const [ingredients, setIngredients] = useState<IIngredient[]>([]);
+
+    const addIngredient = (ingredient: IIngredient) => {
+        setIngredients(prev => [...prev, ingredient])
+        console.log(ingredients)
+    }
     return (
         <main className={styles.main}>
-            <BurgerIngridients />
-            <BurgerComponentSection />
+            <BurgerIngredients ingredients={ingredients} addIngredient={addIngredient}/>
+            <BurgerConstructor ingredients={ingredients} />
         </main>
     )
 }

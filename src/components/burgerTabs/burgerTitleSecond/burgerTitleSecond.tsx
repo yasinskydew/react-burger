@@ -1,4 +1,4 @@
-import styles from './burger-title-second.module.css'
+import styles from './burgerTitleSecond.module.css'
 
 export default function BurgerTitleSecond({ children }: { children: React.ReactNode }) {
     return (

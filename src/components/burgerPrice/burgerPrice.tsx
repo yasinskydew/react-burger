@@ -1,5 +1,5 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from './burger-price.module.css';
+import styles from './burgerPrice.module.css';
 
 interface BurgerPriceProps {
   price: number;

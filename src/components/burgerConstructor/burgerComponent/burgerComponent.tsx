@@ -1,33 +1,35 @@
 import {DragIcon, ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from './burger-component.module.css'
+import styles from './burgerComponent.module.css'
+import { IIngredient } from "../../../utils/data";
 
-export interface BurgerComponentProps {
-  id: number;
-  image: string;
-  title: string;
-  price: number;
-  isLocked: boolean;
-  type?: string;
+export enum BurgerComponentType {
+  top = 'top',
+  bottom = 'bottom'
+}
+export interface BurgerComponentProps extends IIngredient {
+  positionType?: BurgerComponentType
+  isLocked: boolean
 }
 
 export default function BurgerComponent({ 
-  id,
+  _id,
   image, 
-  title, 
+  name, 
   price,
+  type,
+  positionType,
   isLocked,
-  type
 }: BurgerComponentProps) {
   return (
     <article className={styles.burger_component}>
-      {!type ? <DragIcon type="primary" /> : <div/>}
+      {!isLocked ? <DragIcon type="primary" /> : <div/>}
       <ConstructorElement 
-          key={id} 
-          text={title} 
+          key={_id} 
+          text={name} 
           thumbnail={image} 
           price={price} 
           isLocked={isLocked} 
-          type={type as 'top' | 'bottom'}
+          type={positionType}
           extraClass={styles.constructor_element}
         />
     </article>
