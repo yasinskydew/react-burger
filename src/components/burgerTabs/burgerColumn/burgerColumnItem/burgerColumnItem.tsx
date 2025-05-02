@@ -5,16 +5,16 @@ import { IIngredient } from '../../../../utils/data';
 
 export interface BurgerColumnItemProps extends IIngredient {
     count: number
-    onClick?: () => void
+    onClick: () => void
 }
 
 export default function BurgerColumnItem({ image, price, count, name, onClick }: BurgerColumnItemProps) {
     
-    const increment = () => {
-        if(onClick) onClick()
-    }
+    
+
+
     return (
-        <div className={styles.burger_column_item} onClick={increment}>
+        <div className={styles.burger_column_item} onClick={onClick}>
             <img src={image} alt={name} />
             {count > 0 && <Counter count={count} size="default" />}
             <BurgerPrice price={price} />

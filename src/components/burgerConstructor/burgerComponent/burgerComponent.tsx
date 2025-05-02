@@ -1,14 +1,11 @@
 import {DragIcon, ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './burgerComponent.module.css'
-import { IIngredient } from "../../../utils/data";
+import { BurgerComponentType, IIngredient } from "../../../utils/data";
 
-export enum BurgerComponentType {
-  top = 'top',
-  bottom = 'bottom'
-}
 export interface BurgerComponentProps extends IIngredient {
   positionType?: BurgerComponentType
   isLocked: boolean
+  handleClose: () => void
 }
 
 export default function BurgerComponent({ 
@@ -16,9 +13,9 @@ export default function BurgerComponent({
   image, 
   name, 
   price,
-  type,
   positionType,
   isLocked,
+  handleClose,
 }: BurgerComponentProps) {
   return (
     <article className={styles.burger_component}>
@@ -31,6 +28,7 @@ export default function BurgerComponent({
           isLocked={isLocked} 
           type={positionType}
           extraClass={styles.constructor_element}
+          handleClose={handleClose}
         />
     </article>
   );

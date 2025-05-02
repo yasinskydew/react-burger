@@ -6,8 +6,9 @@ import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 
 interface BurgerConstructorProps {
   ingredients: IIngredient[]
+  deleteIngridient: (ingredient:IIngredient) => void
 }
-export default function BurgerConstructor({ ingredients }: BurgerConstructorProps) {
+export default function BurgerConstructor({ ingredients, deleteIngridient }: BurgerConstructorProps) {
 
   const getPrice = () => {
     return ingredients.reduce((acc, ingredient) => acc + ingredient.price, 0);
@@ -15,7 +16,7 @@ export default function BurgerConstructor({ ingredients }: BurgerConstructorProp
   return (
     <section className={styles.burgerConstructor}>
       <div className={styles.scrollableContent}>
-        <BurgerComponentList ingredients={ingredients} />
+        <BurgerComponentList ingredients={ingredients} deleteIngridient={deleteIngridient} />
       </div>
       <div className={styles.burgerConstructorBottoms}>
         <BurgerPrice price={getPrice()} size="large" />
