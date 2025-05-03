@@ -5,11 +5,10 @@ import { BurgerComponentType, IIngredient } from "../../../utils/data";
 export interface BurgerComponentProps extends IIngredient {
   positionType?: BurgerComponentType
   isLocked: boolean
-  handleClose: () => void
+  handleClose?: () => void
 }
 
 export default function BurgerComponent({ 
-  _id,
   image, 
   name, 
   price,
@@ -21,7 +20,6 @@ export default function BurgerComponent({
     <article className={styles.burger_component}>
       {!isLocked ? <DragIcon type="primary" /> : <div/>}
       <ConstructorElement 
-          key={_id} 
           text={name} 
           thumbnail={image} 
           price={price} 

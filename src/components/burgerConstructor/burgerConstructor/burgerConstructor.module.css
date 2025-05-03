@@ -2,8 +2,9 @@
   display: flex;
   flex-direction: column;
   margin-top: 100px;
-  justify-content: space-between;
   margin-bottom: 52px;
+  gap: 16px;
+  min-height: calc(100vh - 300px);
 }
 .burgerConstructorBottoms {
   display: flex;
@@ -11,11 +12,12 @@
   justify-content: flex-end;
   gap: 40px;
   align-items: center;
+  margin-top: auto;
 }
 
 .scrollableContent {
   overflow-y: auto;
-  max-height: calc(100vh - 350px);
+  max-height: 560px;
   padding-right: 8px;
 }
 
