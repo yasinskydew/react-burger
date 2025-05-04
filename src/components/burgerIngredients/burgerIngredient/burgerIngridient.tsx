@@ -1,8 +1,6 @@
-
-
-import { IIngredient, ITab,  } from '../../../utils/data';
 import BurgerTitleSecond from '../../burgerTabs/burgerTitleSecond/burgerTitleSecond';
 import BurgerColumnList from '../../burgerTabs/burgerColumn/burgerColumnList/burgerColumnList';
+import { IIngredient, ITab } from '../../api/types';
 
 interface BurgerIngredientProps {
     ingredients: IIngredient[]

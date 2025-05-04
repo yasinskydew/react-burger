@@ -1,7 +1,7 @@
 import BurgerPrice from '../../../burgerPrice/burgerPrice';
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './burgerColumnItem.module.css'
-import { IIngredient } from '../../../../utils/data';
+import { IIngredient } from '../../../api/types';
 
 export interface BurgerColumnItemProps extends IIngredient {
     count: number

@@ -1,11 +1,19 @@
 import styles from './main.module.css'
-import { getDefaultIngridients, IIngredient } from '../../utils/data'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import BurgerConstructor from '../burgerConstructor/burgerConstructor/burgerConstructor';
 import BurgerIngredients from '../burgerIngredients/burgerIngredients';
+import { IIngredient } from '../api/types';
+import { getDefaultIngredients } from '../api';
 
 export default function Main() {
-    const [ingredients, setIngredients] = useState<IIngredient[]>(getDefaultIngridients());
+    const [ingredients, setIngredients] = useState<IIngredient[]>([]);
+
+    useEffect(() => {
+        getDefaultIngredients()
+            .then(data => {
+                setIngredients(data);
+            });
+    }, []);
 
     const addIngredient = (ingredient: IIngredient) => {
         setIngredients(prev => {

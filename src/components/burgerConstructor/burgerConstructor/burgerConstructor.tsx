@@ -1,4 +1,4 @@
-import { IIngredient } from '../../../utils/data'
+import { IIngredient } from '../../api/types'
 import BurgerPrice from '../../burgerPrice/burgerPrice'
 import BurgerComponent from '../burgerComponent/burgerComponent';
 import BurgerComponentList from '../burgerComponentList/burgerComponentList'

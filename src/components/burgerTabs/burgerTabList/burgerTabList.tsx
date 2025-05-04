@@ -1,6 +1,6 @@
 import BurgerTabItem from '../burgetTabItem/burgerTabItem';
 import styles from './burgerTabList.module.css'
-import { ITab } from '../../../utils/data';
+import { ITab } from '../../api/types';
 
 interface BurgerTabListProps {
     tabs: ITab[];

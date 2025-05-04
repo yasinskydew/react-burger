@@ -1,4 +1,4 @@
-import { IIngredient } from '../../../../utils/data'
+import { IIngredient } from '../../../api/types'
 import BurgerColumnItem from '../burgerColumnItem/burgerColumnItem'
 import styles from './burgerColumnList.module.css'
 export interface BurgerColumnListProps {
