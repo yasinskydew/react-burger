@@ -1,0 +1,41 @@
+.header {
+    background-color: #1c1c21;
+    max-width: 1920px;
+}
+
+.header_button {
+    align-items: center;
+    display: flex;
+    gap: 8px;
+    padding: 16px 20px;
+}
+
+.header_button_text {
+    color: white;
+}
+
+.header_button_text_secondary {
+    color: var(--text-inactive-color);
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    max-width: 1320px;
+    margin: 0 auto;
+    min-height: 88px;
+    align-items: center;
+}
+
+.header_profile {
+    justify-self: end;
+}
+
+.header_logo {
+    justify-self: center;
+}
+
+.header_buttons {
+    display: flex;
+    gap: 8px;
+}
