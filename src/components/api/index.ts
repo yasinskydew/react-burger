@@ -14,21 +14,21 @@ export const getIngredients = async (): Promise<IIngredient[]> => {
 }
 
 
-const getDefaultBun = (ingridients: IIngredient[]) => {
-  return ingridients.find(ingredient => ingredient.type === 'bun' && ingredient.name === 'Краторная булка N-200i');
+const getDefaultBun = (ingridients: IIngredient[]): IIngredient => {
+  const bun = ingridients.find(ingredient => ingredient.type === 'bun' && ingredient.name === 'Краторная булка N-200i');
+  if (!bun) {
+    throw new Error('No default bun found');
+  }
+  return bun;
 }
 
-export const getDefaultIngredients = async () => {
+export const getDefaultIngredients = async (): Promise<IIngredient[]> => {
   try {
     const ingridients = await getIngredients();
     if (ingridients.length === 0) {
       throw new Error('No ingredients found');
     }
     const bun = getDefaultBun(ingridients);
-    if (!bun) {
-      throw new Error('No defaultbun found');
-    }
-
     const defaultIngredients = [
       {
         ...bun,
@@ -66,7 +66,7 @@ const tabs: ITab[] = [
   }
 ]
 
-export const getTabs = () => {
+export const getTabs = (): ITab[] => {
   return tabs;
 }
 
