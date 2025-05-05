@@ -2,6 +2,7 @@ import styles from './modal.module.css'
 import ReactDOM from 'react-dom';
 import { useEffect } from 'react';
 import ModalOverlay from './modal-overlay';
+import closeIcon from '../../images/popup/close-icon.svg';
 
 const modalRoot = document.getElementById("react-modals") as Element;
 
@@ -41,7 +42,7 @@ export default function Modal(props: ModalProps) {
             <div className={styles.modal}>
                 <div className={styles.modal_header}>
                     <h2 className={styles.modal_title + ' text_type_main-large'}>{title}</h2>
-                    <button className={styles.modal_close} onClick={onClose}></button>
+                    <button className={styles.modal_close} onClick={onClose}><img src={closeIcon} alt="close" /></button>
                 </div>
                 <div className={styles.modal_content}>
                     {children}

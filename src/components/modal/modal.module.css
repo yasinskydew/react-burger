@@ -41,25 +41,6 @@
     position: relative;
 }
 
-.modal_close::before,
-.modal_close::after {
-    content: '';
-    position: absolute;
-    width: 24px;
-    height: 2px;
-    background-color: #F2F2F3;
-    top: 50%;
-    left: 0;
-}
-
-.modal_close::before {
-    transform: rotate(45deg);
-}
-
-.modal_close::after {
-    transform: rotate(-45deg);
-}
-
 .modal_content {
     color: #F2F2F3;
 }

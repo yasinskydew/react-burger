@@ -6,6 +6,7 @@ import styles from './burgerConstructor.module.css'
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from '../../modal/modal';
 import { useState } from 'react';
+import OrderDetails from '../../orderDetails/orderDetails';
 
 interface BurgerConstructorProps {
   ingredients: IIngredient[]
@@ -51,9 +52,9 @@ export default function BurgerConstructor({ ingredients, deleteIngridient }: Bur
       <Modal
           isOpen={isModalOpen}
           onClose={handleCloseModal}
-          title="Детали ингредиента"
+          title=""
       >
-        <></>
+        <OrderDetails />
       </Modal>
     </section>
   );
