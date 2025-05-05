@@ -12,7 +12,7 @@ interface BurgerIngredientProps {
 export default function BurgerIngredient(props: BurgerIngredientProps) {
     return (
         <>
-             <BurgerTitleSecond>
+            <BurgerTitleSecond>
                 {props.tab.title}
             </BurgerTitleSecond>
             <BurgerColumnList data={props.data} ingredients={props.ingredients} addIngredient={props.addIngredient}/>
