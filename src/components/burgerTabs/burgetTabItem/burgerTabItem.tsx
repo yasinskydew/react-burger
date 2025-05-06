@@ -1,5 +1,5 @@
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
-import { ITab } from '../../../utils/data';
+import { ITab } from '../../api/types';
 
 interface BurgerTabItemProps {
     children: ITab;

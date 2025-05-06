@@ -1,6 +1,6 @@
 import BurgerComponent from '../burgerComponent/burgerComponent';
 import styles from './burgerComponentList.module.css'
-import { IIngredient } from '../../../utils/data';
+import { IIngredient } from '../../api/types';
 
 export interface BurgerComponentListProps {
   ingredients: IIngredient[];

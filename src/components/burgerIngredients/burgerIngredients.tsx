@@ -2,9 +2,10 @@
 
 import BurgerTabList from '../burgerTabs/burgerTabList/burgerTabList';
 import styles from './burgerIngredients.module.css';
-import { getIngredients, getTabs, IIngredient } from '../../utils/data';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import BurgerIngredient from './burgerIngredient/burgerIngridient';
+import { getIngredients, getTabs } from '../api';
+import { IIngredient } from '../api/types';
 
 interface BurgerIngredientsProps {
     ingredients: IIngredient[]
@@ -14,7 +15,14 @@ interface BurgerIngredientsProps {
 export default function BurgerIngredients(props: BurgerIngredientsProps) {
     const { ingredients } = props;
     const [tabs, setTabs] = useState(getTabs());
-    const data = getIngredients()
+    const [data, setData] = useState<IIngredient[]>([]);
+
+    useEffect(() => {
+        getIngredients()
+            .then(data => {
+                setData(data);
+            });
+     }, []);
 
     const setActiveTab = (newId: string) => {
         const newTabs = tabs.map(t => {

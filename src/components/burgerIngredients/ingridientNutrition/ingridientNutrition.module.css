@@ -1,0 +1,24 @@
+.ingridientNutritionList {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.ingridientNutritionItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.ingridientNutritionItemTitle {
+  margin: 0;
+  letter-spacing: 0;
+}
+
+.ingridientNutritionItemValue {
+  margin: 0;
+  letter-spacing: 0;
+}
