@@ -2,11 +2,17 @@ import { BurgerComponentType, IIngredient, ITab } from "./types";
 
 const API_URL = 'https://norma.nomoreparties.space/api';
 
+export const fetchWrapper = async (url: string, options: RequestInit = {}): Promise<any> => {
+  return fetch(url, options).then(res => {
+    if (res.ok) return res.json();
+    return Promise.reject(`Ошибка ${res.status}`);
+})
+}
+
 export const getIngredients = async (): Promise<IIngredient[]> => {
   try {
-    const response = await fetch(`${API_URL}/ingredients`);
-    const data = await response.json();
-    return data.data;
+    const response = await fetchWrapper(`${API_URL}/ingredients`);
+    return response.data;
   } catch (error) {
     console.error('Error fetching ingredients:', error);
     return [];
