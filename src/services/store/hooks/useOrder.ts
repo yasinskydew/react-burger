@@ -12,7 +12,7 @@ interface UseOrderReturn {
     addPosition: (ingredient: IIngredient) => void;
     removePosition: (ingredient: IOrderPosition) => void;
     clearOrder: () => void;
-    createOrder: (order: IOrder) => Promise<void>;
+    createOrder: () => Promise<void>;
     order: IOrderResponse | null;
     setDefaultBun: (ingredient: IIngredient) => void;
 }
@@ -34,7 +34,15 @@ export const useOrder = (): UseOrderReturn => {
     dispatch(clearOrderIngridients());
   }
 
-  const createOrder = async (order: IOrder) => {
+  const createOrder = async () => {
+    const ingredients = items.map(item => item._id);
+    if (bun) {
+      ingredients.push(bun._id);
+      ingredients.push(bun._id);
+    }
+    const order = {
+      ingredients: ingredients
+    }
     const response = await createOrderMutation(order);
     if (response.data) {
       dispatch(setOrder(response.data));

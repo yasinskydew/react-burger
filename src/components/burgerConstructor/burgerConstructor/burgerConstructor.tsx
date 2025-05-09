@@ -20,9 +20,7 @@ export default function BurgerConstructor() {
       setIsModalOpen(true)
       return;
     }
-    await createOrder({
-      ingredients: items.map((item) => item._id),
-    });
+    await createOrder();
     setIsModalOpen(true)
   };
   
