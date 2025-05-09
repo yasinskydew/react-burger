@@ -8,8 +8,7 @@ import BurgerComponentList from '../burgerComponentList/burgerComponentList';
 import BurgerPrice from '../../burgerPrice/burgerPrice';
 import BurgerComponent from '../burgerComponent/burgerComponent';
 import { useDrop } from 'react-dnd';
-import { ItemTypes } from '../../burgerTabs/burgerColumn/burgerColumnItem/burgerColumnItem';
-import { IIngredient } from '../../../services/types';
+import { DragItemTypes, IIngredient } from '../../../services/types';
 
 export default function BurgerConstructor() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -30,7 +29,7 @@ export default function BurgerConstructor() {
 
   const dropRef = useRef<HTMLDivElement>(null);
   const [, drop] = useDrop({
-    accept: ItemTypes.INGREDIENT,
+    accept: DragItemTypes.INGREDIENT,
     drop(item: { ingredient: IIngredient }) {
       if(item.ingredient._id === bun._id) {
         return;
@@ -48,7 +47,7 @@ export default function BurgerConstructor() {
   return (
     <section className={styles.burgerConstructor}>
       <div className={styles.burgerConstructorContent} ref={dropRef}>
-        <BurgerComponent {...bun} isLocked={true} />
+        <BurgerComponent {...bun} isLocked={true} index={0} />
         {
           Object.keys(items).length > 0 && (
             <div className={styles.scrollableContent}>
@@ -56,7 +55,7 @@ export default function BurgerConstructor() {
             </div>
           )
         }
-        <BurgerComponent {...bun} isLocked={true} />
+        <BurgerComponent {...bun} isLocked={true} index={0} />
       </div>
       <div className={styles.burgerConstructorBottoms}>
         <BurgerPrice size="large" price={totalPrice} />

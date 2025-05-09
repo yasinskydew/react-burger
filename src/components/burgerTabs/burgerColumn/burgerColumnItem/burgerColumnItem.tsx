@@ -1,14 +1,10 @@
 import BurgerPrice from '../../../burgerPrice/burgerPrice';
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './burgerColumnItem.module.css'
-import { IIngredient } from '../../../../services/types';
+import { IIngredient, DragItemTypes } from '../../../../services/types';
 import { useOrder } from '../../../../services/store/hooks/useOrder';
 import { useDrag } from 'react-dnd';
 import { useRef } from 'react';
-
-export const ItemTypes = {
-    INGREDIENT: 'ingredient',
-}
 
 export interface BurgerColumnItemProps extends IIngredient {
     onClick: () => void
@@ -19,7 +15,7 @@ export default function BurgerColumnItem({ onClick, ...ingredient }: BurgerColum
     const dragRef = useRef<HTMLDivElement>(null);
     
     const [{isDrag}, drag] = useDrag({
-        type: ItemTypes.INGREDIENT,
+        type: DragItemTypes.INGREDIENT,
         item: { ingredient: ingredient },
         collect: monitor => ({
             isDrag: monitor.isDragging()

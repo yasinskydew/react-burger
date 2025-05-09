@@ -3,6 +3,12 @@ export enum BurgerComponentType {
   bottom = 'bottom'
 }
 
+
+export const DragItemTypes = {
+  INGREDIENT: 'ingredient',
+  COMPONENT: 'component',
+}
+
 export interface IOrderPosition extends IIngredient {
   orderPosition: number;
 }

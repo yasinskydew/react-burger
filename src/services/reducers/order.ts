@@ -51,6 +51,15 @@ const orderSlice = createSlice({
         },
         setOrder: (state, action: PayloadAction<IOrderResponse>) => {
             state.order = action.payload;
+        },
+        changePosition: (state, action: PayloadAction<{ dragIndex: number; hoverIndex: number }>) => {
+            const { dragIndex, hoverIndex } = action.payload;
+            const draggedItem = state.items[dragIndex];
+            state.items.splice(dragIndex, 1);
+            state.items.splice(hoverIndex, 0, draggedItem);
+            state.items.forEach((item, index) => {
+                item.orderPosition = index + 1;
+            });
         }
     },
 });
@@ -60,7 +69,8 @@ export const {
     removeIngridient, 
     clearOrderIngridients, 
     setOrder,
-    setBun, 
+    setBun,
+    changePosition,
 } = orderSlice.actions;
 
 export default orderSlice.reducer;

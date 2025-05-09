@@ -12,7 +12,7 @@ export default function BurgerComponentList() {
   const { items, removePosition } = useOrder();
   return (
     <div className={styles.burgerComponentList}>
-      {Object.values(items).map((item) => {
+      {Object.values(items).map((item, index) => {
         return (
           <BurgerComponent 
             key={item.orderPosition} 
@@ -21,6 +21,7 @@ export default function BurgerComponentList() {
             handleClose={() => {
               removePosition(item)
             }} 
+            index={index}
             {...item} 
           />
         )
