@@ -3,16 +3,32 @@ import { Counter } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './burgerColumnItem.module.css'
 import { IIngredient } from '../../../../services/types';
 import { useOrder } from '../../../../services/store/hooks/useOrder';
-import { useIngridients } from '../../../../services/store/hooks';
+import { useDrag } from 'react-dnd';
+import { useRef } from 'react';
+
+export const ItemTypes = {
+    INGREDIENT: 'ingredient',
+}
 
 export interface BurgerColumnItemProps extends IIngredient {
     onClick: () => void
 }
 
 export default function BurgerColumnItem({ onClick, ...ingredient }: BurgerColumnItemProps) {
-    const { items } = useOrder();
-    const { getDefaultBun } = useIngridients();
-    const bun = getDefaultBun();
+    const { items, getBun } = useOrder();
+    const dragRef = useRef<HTMLDivElement>(null);
+    
+    const [{isDrag}, drag] = useDrag({
+        type: ItemTypes.INGREDIENT,
+        item: { ingredient: ingredient },
+        collect: monitor => ({
+            isDrag: monitor.isDragging()
+        })
+    });
+
+    drag(dragRef);
+
+    const bun = getBun();
 
     const getCount = () => {
         if(ingredient._id === bun._id) {
@@ -23,7 +39,7 @@ export default function BurgerColumnItem({ onClick, ...ingredient }: BurgerColum
     }
 
     return (
-        <div className={styles.burger_column_item} onClick={onClick}>
+        <div className={styles.burger_column_item} onClick={onClick} ref={dragRef} style={{ opacity: isDrag ? 0.4 : 1 }}>
             <img src={ingredient.image} alt={ingredient.name} />
             {getCount() > 0 && <Counter count={getCount()} size="default" />}
             <BurgerPrice size="default" price={ingredient.price} />

@@ -3,23 +3,30 @@ import { useEffect } from 'react'
 import BurgerConstructor from '../burgerConstructor/burgerConstructor/burgerConstructor';
 import BurgerIngredients from '../burgerIngredients/burgerIngredients';
 import { useGetIngridientsQuery } from '../../services/api/ingridient';
-import { useDispatch } from 'react-redux';
-import { setIngredients } from '../../services/reducers/ingredients';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { useIngridients } from '../../services/store/hooks';
+import { IIngredient } from '../../services/types';
+
 
 export default function Main() {
     const { data: ingredientsData } = useGetIngridientsQuery()
-    const dispatch = useDispatch();
+    const { setupIngredients, setDefaultBun } = useIngridients();
 
     useEffect(() => {
         if (ingredientsData && ingredientsData.success) {
-            dispatch(setIngredients(ingredientsData.data));
+            setupIngredients(ingredientsData.data);
+            setDefaultBun(ingredientsData.data.find(ingredient => ingredient.type === 'bun') as IIngredient);
         }
-    }, [ingredientsData, dispatch]);
+        
+    }, [ingredientsData, setupIngredients, setDefaultBun]);
 
     return (
         <main className={styles.main}>
-            <BurgerIngredients />
-            <BurgerConstructor />
+            <DndProvider backend={HTML5Backend}>
+                <BurgerIngredients />
+                <BurgerConstructor />
+            </DndProvider>
         </main>
     )
 }

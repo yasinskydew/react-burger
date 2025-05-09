@@ -4,15 +4,15 @@ import { IIngredient, IOrderPosition, IOrderResponse } from "../types";
 
 interface IOrderState {
     items: IOrderPosition[];
-    defaultBun: IIngredient | null;
+    bun: IIngredient | null;
     totalPrice: number;
     order: IOrderResponse | null;
 }
 
 const initialState: IOrderState = {
     items: [],
-    defaultBun: null,
-    totalPrice: 1255 * 2,
+    bun: null,
+    totalPrice: 0,
     order: null,
 }
 
@@ -40,8 +40,14 @@ const orderSlice = createSlice({
             state.items = [];
             state.totalPrice = 0;
         },
-        setDefaultBun: (state, action: PayloadAction<IIngredient>) => {
-            state.defaultBun = action.payload;
+        setBun: (state, action: PayloadAction<IIngredient>) => {
+            if (state.bun) {
+                state.totalPrice -= state.bun.price * 2;
+                state.bun = null;
+            }
+
+            state.bun = action.payload;
+            state.totalPrice += action.payload.price * 2;
         },
         setOrder: (state, action: PayloadAction<IOrderResponse>) => {
             state.order = action.payload;
@@ -54,6 +60,7 @@ export const {
     removeIngridient, 
     clearOrderIngridients, 
     setOrder,
-    setDefaultBun, 
+    setBun, 
 } = orderSlice.actions;
+
 export default orderSlice.reducer;

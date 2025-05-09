@@ -2,22 +2,24 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { IIngredient, IOrder, IOrderPosition, IOrderResponse } from "../../types";
 import { ApplicationState } from "../store";
-import { addIngridient, removeIngridient, clearOrderIngridients, setOrder } from "../../reducers/order";
+import { addIngridient, removeIngridient, clearOrderIngridients, setOrder, setBun } from "../../reducers/order";
 import { useCreateOrderMutation } from "../../api/order";
 
 interface UseOrderReturn {
     items: IOrderPosition[];
     totalPrice: number;
+    getBun: () => IIngredient;
     addPosition: (ingredient: IIngredient) => void;
     removePosition: (ingredient: IOrderPosition) => void;
     clearOrder: () => void;
     createOrder: (order: IOrder) => Promise<void>;
     order: IOrderResponse | null;
+    setDefaultBun: (ingredient: IIngredient) => void;
 }
 
 export const useOrder = (): UseOrderReturn => {
   const dispatch = useDispatch();
-  const { items, totalPrice, order } = useSelector((state: ApplicationState) => state.order);
+  const { items, totalPrice, order, bun } = useSelector((state: ApplicationState) => state.order);
   const [createOrderMutation] = useCreateOrderMutation();
 
   const addPosition = (ingredient: IIngredient) => {
@@ -39,5 +41,13 @@ export const useOrder = (): UseOrderReturn => {
     }
   }
 
-  return { items, totalPrice, addPosition, removePosition, clearOrder, createOrder, order };
+  const setDefaultBun = (ingredient: IIngredient) => {
+    dispatch(setBun(ingredient));
+  }
+
+  const getBun = () => {
+    return bun as IIngredient;
+  }
+
+  return { items, totalPrice, getBun, addPosition, removePosition, clearOrder, createOrder, order, setDefaultBun };
 }
