@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { IIngredient } from '../../../api/types'
+import { IIngredient } from '../../../../services/types'
 import Modal from '../../../modal/modal'
 import BurgerColumnItem from '../burgerColumnItem/burgerColumnItem'
 import styles from './burgerColumnList.module.css'

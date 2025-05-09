@@ -1,4 +1,4 @@
-import { IIngredient } from '../../api/types'
+import { IIngredient } from '../../../services/types'
 import BurgerPrice from '../../burgerPrice/burgerPrice'
 import BurgerComponent from '../burgerComponent/burgerComponent';
 import BurgerComponentList from '../burgerComponentList/burgerComponentList'

@@ -1,4 +1,4 @@
-import { IIngredient } from "../../api/types"
+import { IIngredient } from "../../../services/types"
 import IngridientNutritionList from "../ingridientNutrition/ingridientNutritionList";
 import styles from './ingridientDetails.module.css';
 interface IngridientDetailsProps {

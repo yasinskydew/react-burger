@@ -1,6 +1,6 @@
 import {DragIcon, ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './burgerComponent.module.css'
-import { BurgerComponentType, IIngredient } from "../../api/types";
+import { BurgerComponentType, IIngredient } from "../../../services/types";
 
 export interface BurgerComponentProps extends IIngredient {
   positionType?: BurgerComponentType

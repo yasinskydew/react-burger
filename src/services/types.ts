@@ -22,24 +22,20 @@ export interface IIngredient {
 export interface ITab {
   id: string;
   title: string;
-  isActive: boolean;
 }
 
 const tabs: ITab[] = [
   {
      id: 'bun',
      title: 'Булки',
-     isActive: true,
   },
   {
      id: 'main',
      title: 'Начинки',
-     isActive: false,
   },
   {
      id: 'sauce',
      title: 'Соусы',
-     isActive: false,
   }
 ]
 
