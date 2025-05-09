@@ -5,14 +5,12 @@ interface IngredientsState {
   items: IIngredient[];
   loading: boolean;
   error: string | null;
-  defaultBun: IIngredient | null;
 }
 
 const initialState: IngredientsState = {
   items: [],
   loading: false,
   error: null,
-  defaultBun: null
 };
 
 const ingredientsSlice = createSlice({
@@ -31,9 +29,6 @@ const ingredientsSlice = createSlice({
       state.error = action.payload;
       state.loading = false;
     },
-    setDefaultBun: (state, action: PayloadAction<IIngredient>) => {
-      state.defaultBun = action.payload;
-    }
   }
 });
 

@@ -1,50 +1,46 @@
-import { IIngredient } from '../../../services/types'
-import BurgerPrice from '../../burgerPrice/burgerPrice'
-import BurgerComponent from '../burgerComponent/burgerComponent';
-import BurgerComponentList from '../burgerComponentList/burgerComponentList'
 import styles from './burgerConstructor.module.css'
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from '../../modal/modal';
 import { useState } from 'react';
 import OrderDetails from '../../orderDetails/orderDetails';
+import { useOrder } from '../../../services/store/hooks/useOrder';
+import BurgerComponentList from '../burgerComponentList/burgerComponentList';
+import BurgerPrice from '../../burgerPrice/burgerPrice';
+import { useIngridients } from '../../../services/store/hooks/useIngridients';
+import BurgerComponent from '../burgerComponent/burgerComponent';
 
-interface BurgerConstructorProps {
-  ingredients: IIngredient[]
-  deleteIngridient: (ingredient:IIngredient) => void
-}
-export default function BurgerConstructor({ ingredients, deleteIngridient }: BurgerConstructorProps) {
+export default function BurgerConstructor() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { items, totalPrice, createOrder, order } = useOrder();
 
-  const handleOpenModal = () => setIsModalOpen(true);
+  const handleOpenModal = async () => {
+    if (order) {
+      setIsModalOpen(true)
+      return;
+    }
+    await createOrder({
+      ingredients: items.map((item) => item._id),
+    });
+    setIsModalOpen(true)
+  };
+  
   const handleCloseModal = () => setIsModalOpen(false);
-
-  const getPrice = () => {
-    return ingredients.reduce((acc, ingredient) => acc + ingredient.price, 0);
-  }
-  const getTopIngridients = () => {
-    return ingredients.find(ingredient => ingredient.positionType === 'top') as IIngredient;
-  }
-  const getBottomIngridients = () => {
-    return ingredients.find(ingredient => ingredient.positionType === 'bottom') as IIngredient;
-  }
-
-  const getIngridients = () => {
-
-    return ingredients.filter(ingredient => ingredient.positionType !== 'top' && ingredient.positionType !== 'bottom');
-  }
+  const { getDefaultBun } = useIngridients();
+  const bun = getDefaultBun();
   return (
     <section className={styles.burgerConstructor}>
-      <BurgerComponent {...getTopIngridients()} isLocked={true} />
+
+      <BurgerComponent {...bun} isLocked={true} />
       {
-        getIngridients().length > 0 && (
+        Object.keys(items).length > 0 && (
           <div className={styles.scrollableContent}>
-            <BurgerComponentList ingredients={getIngridients()} deleteIngridient={deleteIngridient} />
+            <BurgerComponentList />
           </div>
         )
       }
-      <BurgerComponent {...getBottomIngridients()} isLocked={true} />
+      <BurgerComponent {...bun} isLocked={true} />
       <div className={styles.burgerConstructorBottoms}>
-        <BurgerPrice price={getPrice()} size="large" />
+        <BurgerPrice size="large" price={totalPrice} />
         <Button htmlType="submit" type="primary" size="large" onClick={handleOpenModal}>
             Оформить заказ
         </Button>

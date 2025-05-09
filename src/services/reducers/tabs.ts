@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { PayloadAction } from "@reduxjs/toolkit";
-import { getTabs, ITab } from "../types";
+import { getTabs } from "../types";
 
 const initialState = {
   tabs: getTabs(),

@@ -1,6 +1,6 @@
 import styles from './main.module.css'
 import { useEffect } from 'react'
-// import BurgerConstructor from '../burgerConstructor/burgerConstructor/burgerConstructor';
+import BurgerConstructor from '../burgerConstructor/burgerConstructor/burgerConstructor';
 import BurgerIngredients from '../burgerIngredients/burgerIngredients';
 import { useGetIngridientsQuery } from '../../services/api/ingridient';
 import { useDispatch } from 'react-redux';
@@ -19,7 +19,7 @@ export default function Main() {
     return (
         <main className={styles.main}>
             <BurgerIngredients />
-            {/* <BurgerConstructor /> */}
+            <BurgerConstructor />
         </main>
     )
 }

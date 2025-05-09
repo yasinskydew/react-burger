@@ -6,10 +6,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectActiveTab } from '../../services/reducers/tabs';
 import BurgerTitleSecond from '../burgerTabs/burgerTitleSecond/burgerTitleSecond';
 import BurgerColumnList from '../burgerTabs/burgerColumn/burgerColumnList/burgerColumnList';
-import { IIngredient, ITab } from '../../services/types';
+import { ITab } from '../../services/types';
 
 export default function BurgerIngredients() {
-    const ingredients = useSelector((state: ApplicationState) => state.ingredients.items);
     const tabs = useSelector((state: ApplicationState) => state.tabs.tabs);
     const activeTab = useSelector((state: ApplicationState) => state.tabs.activeTab);
     const dispatch = useDispatch();
@@ -52,10 +51,6 @@ export default function BurgerIngredients() {
         };
     }, [handleScroll]);
 
-    const getByType = (type: string): IIngredient[] => {
-        return ingredients.filter(ingredient => ingredient.type === type);
-    };
-
     return (
         <section className={styles.section_burger_ingredients}>
             <h1 className={styles.burger_title + ' text_type_main-large'}>
@@ -71,11 +66,7 @@ export default function BurgerIngredients() {
                         <BurgerTitleSecond tabId={tab.id}>
                             {tab.title}
                         </BurgerTitleSecond>
-                        <BurgerColumnList 
-                            data={getByType(tab.id)} 
-                            ingredients={ingredients} 
-                            addIngredient={() => {}}
-                        />
+                        <BurgerColumnList type={tab.id} />
                     </section>
                 ))}
             </div>

@@ -1,23 +1,28 @@
 import BurgerComponent from '../burgerComponent/burgerComponent';
 import styles from './burgerComponentList.module.css'
-import { IIngredient } from '../../../services/types';
+import { IIngredient, IOrderPosition } from '../../../services/types';
+import { useOrder } from '../../../services/store/hooks/useOrder';
 
 export interface BurgerComponentListProps {
-  ingredients: IIngredient[];
+  ingredients: Map<string, IOrderPosition>;
   deleteIngridient: (ingredient: IIngredient) => void
 }
 
-export default function BurgerComponentList({
-  ingredients,
-  deleteIngridient
-}: BurgerComponentListProps) {
+export default function BurgerComponentList() {
+  const { items, removePosition } = useOrder();
   return (
     <div className={styles.burgerComponentList}>
-      {ingredients.map((item) => {
+      {Object.values(items).map((item) => {
         return (
-          <BurgerComponent key={item._id} positionType={item.positionType} isLocked={!!item.positionType} handleClose={() => {
-            deleteIngridient(item)
-          }} {...item} />
+          <BurgerComponent 
+            key={item.orderPosition} 
+            positionType={item.positionType} 
+            isLocked={!!item.positionType} 
+            handleClose={() => {
+              removePosition(item)
+            }} 
+            {...item} 
+          />
         )
       })}
     </div>

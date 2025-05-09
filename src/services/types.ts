@@ -3,6 +3,23 @@ export enum BurgerComponentType {
   bottom = 'bottom'
 }
 
+export interface IOrderPosition extends IIngredient {
+  orderPosition: number;
+}
+
+export interface IOrder {
+  ingredients: string[];
+}
+
+export interface IOrderResponse {
+  name: string;
+  order: {
+    number: number;
+  };
+  success: boolean;
+}
+
+
 export interface IIngredient {
  _id: string;
  name: string;

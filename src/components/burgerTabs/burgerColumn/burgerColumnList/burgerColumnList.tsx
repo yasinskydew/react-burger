@@ -4,34 +4,33 @@ import Modal from '../../../modal/modal'
 import BurgerColumnItem from '../burgerColumnItem/burgerColumnItem'
 import styles from './burgerColumnList.module.css'
 import IngridientDetails from '../../../burgerIngredients/ingridientDetails/ingridientDetails'
-export interface BurgerColumnListProps {
-  data: IIngredient[]
-  ingredients: IIngredient[]
-  addIngredient: (ingredient: IIngredient) => void
+import { useIngridients } from '../../../../services/store/hooks';
+import { clearCurrentIngredient, setCurrentIngredient } from '../../../../services/reducers/currentIngridient'
+import { useDispatch } from 'react-redux'
+
+interface IBurgerColumnListProps {
+    type: string;
 }
 
-export default function BurgerColumnList({ data, ingredients, addIngredient }: BurgerColumnListProps) {
-
-    const [ingridient, setIngridient] = useState<IIngredient | null>(null);
+export default function BurgerColumnList({ type }: IBurgerColumnListProps) {
+    const { getIngridientsByType } = useIngridients();
     const [isModalOpen, setIsModalOpen] = useState(false);
-
+    const dispatch = useDispatch();
     const handleOpenModal = (ingredient: IIngredient) => {
-        setIngridient(ingredient);
+        dispatch(setCurrentIngredient(ingredient));
         setIsModalOpen(true);
-        addIngredient(ingredient);
     };
 
     const handleCloseModal = () => {
-        setIngridient(null);
+        dispatch(clearCurrentIngredient());
         setIsModalOpen(false);
     };
 
     return (
         <div className={styles.burger_column_list}>
-            {data.map((item) => {
-                const count = ingredients.filter((ingredient) => ingredient._id === item._id).length
+            {getIngridientsByType(type).map((item) => {
                 return (
-                    <BurgerColumnItem key={item._id} {...item} count={count} onClick={() => handleOpenModal(item)}/>
+                    <BurgerColumnItem key={item._id} {...item} onClick={() => handleOpenModal(item)}/>
                 )
             })}
         <Modal
@@ -39,7 +38,7 @@ export default function BurgerColumnList({ data, ingredients, addIngredient }: B
             isOpen={isModalOpen}
             onClose={handleCloseModal}
         >
-            <IngridientDetails ingridient={ingridient} />
+            <IngridientDetails />
         </Modal>
         </div>
     ) 

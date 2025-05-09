@@ -3,13 +3,17 @@ import { setupListeners } from '@reduxjs/toolkit/query'
 import { apiSlice } from '../api/create-api'
 import ingredientsReducer from '../reducers/ingredients'
 import tabsReducer from '../reducers/tabs'
+import currentIngredientReducer from '../reducers/currentIngridient'
+import orderReducer from '../reducers/order'
 const isProduction = false;
 
 
 const rootReducer = combineReducers({
   [apiSlice.reducerPath]: apiSlice.reducer,
+  tabs: tabsReducer,
   ingredients: ingredientsReducer,
-  tabs: tabsReducer
+  currentIngredient: currentIngredientReducer,
+  order: orderReducer,
 })
 
 export type ApplicationState = ReturnType<typeof rootReducer>;
