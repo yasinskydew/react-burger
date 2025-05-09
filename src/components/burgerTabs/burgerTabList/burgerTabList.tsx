@@ -1,16 +1,12 @@
 import BurgerTabItem from '../burgetTabItem/burgerTabItem';
 import styles from './burgerTabList.module.css'
-import { ITab } from '../../api/types';
+import { useDispatch, useSelector } from 'react-redux';
+import { ApplicationState } from '../../../services/store/store';
+import { selectActiveTab } from '../../../services/reducers/tabs';
 
-interface BurgerTabListProps {
-    tabs: ITab[];
-    setActive: (id: string) => void
-}
-
-export default function BurgerTabList({
-    tabs,
-    setActive
-}: BurgerTabListProps) {
+export default function BurgerTabList() {
+    const tabs = useSelector((state: ApplicationState) => state.tabs.tabs);
+    const dispatch = useDispatch();
 
 
     return (
@@ -18,7 +14,7 @@ export default function BurgerTabList({
             {tabs.map((tab) => (
                 <BurgerTabItem 
                     key={tab.id} 
-                    onActive={setActive}
+                    onActive={() => dispatch(selectActiveTab(tab.id))}
                 >
                     {tab}
                 </BurgerTabItem>

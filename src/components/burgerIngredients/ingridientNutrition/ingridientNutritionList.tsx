@@ -1,5 +1,5 @@
 import styles from './ingridientNutrition.module.css';
-import { IIngredient } from '../../api/types';
+import { IIngredient } from '../../../services/types';
 import IngridientNutritionItem from './ingridientNutritionItem';
 interface IngridientNutritionListProps {
     ingridient: IIngredient

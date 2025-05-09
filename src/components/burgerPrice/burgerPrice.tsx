@@ -2,11 +2,11 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import styles from './burgerPrice.module.css';
 
 interface BurgerPriceProps {
-  price: number;
   size?: 'default' | 'large';
+  price?: number;
 }
 
-export default function BurgerPrice({ price, size = 'default' }: BurgerPriceProps) {
+export default function BurgerPrice({ size = 'default', price = 0 }: BurgerPriceProps) {
 
   const priceTextClass = size === 'large' ? styles.price_large_text : styles.price_text;
 
