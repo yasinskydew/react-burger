@@ -9,22 +9,21 @@ import BurgerPrice from '../../burgerPrice/burgerPrice';
 import BurgerComponent from '../burgerComponent/burgerComponent';
 import { useDrop } from 'react-dnd';
 import { DragItemTypes, IIngredient } from '../../../services/types';
+import { addIngridient } from '../../../services/reducers/order';
+import { useDispatch } from 'react-redux';
 
 export default function BurgerConstructor() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { items, totalPrice, createOrder, order } = useOrder();
+  const { items, totalPrice, createOrder } = useOrder();
+  const dispatch = useDispatch();
 
   const handleOpenModal = async () => {
-    if (order) {
-      setIsModalOpen(true)
-      return;
-    }
     await createOrder();
     setIsModalOpen(true)
   };
   
   const handleCloseModal = () => setIsModalOpen(false);
-  const { addPosition, getBun, setDefaultBun } = useOrder();
+  const { getBun, setDefaultBun } = useOrder();
   const bun = getBun();
 
   const dropRef = useRef<HTMLDivElement>(null);
@@ -36,7 +35,7 @@ export default function BurgerConstructor() {
       }
 
       if(item.ingredient.type !== 'bun') {
-        return addPosition(item.ingredient);
+        return dispatch(addIngridient(item.ingredient));
       }
      
       return setDefaultBun(item.ingredient);

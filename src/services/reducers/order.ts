@@ -23,6 +23,7 @@ const orderSlice = createSlice({
         addIngridient: (state, action: PayloadAction<IIngredient>) => {
             state.items.push({
                 ...action.payload,
+                id: Math.random().toString(36).substring(7),
                 orderPosition: state.items.length + 1
             });
             state.totalPrice += action.payload.price;

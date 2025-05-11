@@ -4,14 +4,14 @@ import { ApplicationState } from "../store";
 import { setIngredients } from "../../reducers/ingredients";
 import { setBun } from "../../reducers/order";
 
-interface UseIngridientsReturn {
+interface UseIngredientsReturn {
   ingredients: IIngredient[];
   getIngridientsByType: (type: string) => IIngredient[];
   setupIngredients: (ingredients: IIngredient[]) => void;
   setDefaultBun: (ingredient: IIngredient) => void;
 }
 
-export const useIngridients = (): UseIngridientsReturn => {
+export const useIngredients = (): UseIngredientsReturn => {
   const dispatch = useDispatch();
   const ingredients = useSelector((state: ApplicationState) => state.ingredients.items);
 

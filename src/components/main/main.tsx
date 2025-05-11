@@ -5,13 +5,13 @@ import BurgerIngredients from '../burgerIngredients/burgerIngredients';
 import { useGetIngridientsQuery } from '../../services/api/ingridient';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { useIngridients } from '../../services/store/hooks';
+import { useIngredients } from '../../services/store/hooks';
 import { IIngredient } from '../../services/types';
 
 
 export default function Main() {
     const { data: ingredientsData } = useGetIngridientsQuery()
-    const { setupIngredients, setDefaultBun } = useIngridients();
+    const { setupIngredients, setDefaultBun } = useIngredients();
 
     useEffect(() => {
         if (ingredientsData && ingredientsData.success) {

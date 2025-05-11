@@ -4,7 +4,7 @@ import Modal from '../../../modal/modal'
 import BurgerColumnItem from '../burgerColumnItem/burgerColumnItem'
 import styles from './burgerColumnList.module.css'
 import IngridientDetails from '../../../burgerIngredients/ingridientDetails/ingridientDetails'
-import { useIngridients } from '../../../../services/store/hooks';
+import { useIngredients } from '../../../../services/store/hooks';
 import { clearCurrentIngredient, setCurrentIngredient } from '../../../../services/reducers/currentIngridient'
 import { useDispatch } from 'react-redux'
 
@@ -13,7 +13,7 @@ interface IBurgerColumnListProps {
 }
 
 export default function BurgerColumnList({ type }: IBurgerColumnListProps) {
-    const { getIngridientsByType } = useIngridients();
+    const { getIngridientsByType } = useIngredients();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const dispatch = useDispatch();
     const handleOpenModal = (ingredient: IIngredient) => {

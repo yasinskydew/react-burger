@@ -10,6 +10,7 @@ export const DragItemTypes = {
 }
 
 export interface IOrderPosition extends IIngredient {
+  id: string;
   orderPosition: number;
 }
 
