@@ -1,38 +1,37 @@
 import styles from './main.module.css'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import BurgerConstructor from '../burgerConstructor/burgerConstructor/burgerConstructor';
 import BurgerIngredients from '../burgerIngredients/burgerIngredients';
-import { IIngredient } from '../api/types';
-import { getDefaultIngredients } from '../api';
+import { useGetIngridientsQuery } from '../../services/api/ingridient';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { useIngredients } from '../../services/store/hooks';
+import { IIngredient } from '../../services/types';
+
 
 export default function Main() {
-    const [ingredients, setIngredients] = useState<IIngredient[]>([]);
+    const { data: ingredientsData, isLoading, isError } = useGetIngridientsQuery()
+    const { setDefaultBun } = useIngredients();
 
     useEffect(() => {
-        getDefaultIngredients()
-            .then(data => {
-                setIngredients(data);
-            });
-    }, []);
+        if(isLoading) {
+            return;
+        }
+        if(isError) {
+            return;
+        }
+        if (ingredientsData && ingredientsData.success) {
+            setDefaultBun(ingredientsData.data.find(ingredient => ingredient.type === 'bun') as IIngredient);
+        }
+        
+    }, [ingredientsData, setDefaultBun, isLoading, isError]);
 
-    const addIngredient = (ingredient: IIngredient) => {
-        setIngredients(prev => {
-            const lastItem = prev[prev.length - 1];
-            return [...prev.slice(0, -1), ingredient, lastItem];
-        })
-    }
-
-    const deleteIngridient = (ingredient: IIngredient) => {
-        const index = ingredients.findIndex(item => item._id === ingredient._id);
-        if (index === -1) return;
-        const newIngredients = [...ingredients];
-        newIngredients.splice(index, 1);
-        setIngredients(newIngredients);
-    }
     return (
         <main className={styles.main}>
-            <BurgerIngredients ingredients={ingredients} addIngredient={addIngredient}/>
-            <BurgerConstructor ingredients={ingredients} deleteIngridient={deleteIngridient}/>
+            <DndProvider backend={HTML5Backend}>
+                <BurgerIngredients />
+                <BurgerConstructor />
+            </DndProvider>
         </main>
     )
 }

@@ -3,6 +3,30 @@ export enum BurgerComponentType {
   bottom = 'bottom'
 }
 
+
+export const DragItemTypes = {
+  INGREDIENT: 'ingredient',
+  COMPONENT: 'component',
+}
+
+export interface IOrderPosition extends IIngredient {
+  id: string;
+  orderPosition: number;
+}
+
+export interface IOrder {
+  ingredients: string[];
+}
+
+export interface IOrderResponse {
+  name: string;
+  order: {
+    number: number;
+  };
+  success: boolean;
+}
+
+
 export interface IIngredient {
  _id: string;
  name: string;
@@ -22,24 +46,20 @@ export interface IIngredient {
 export interface ITab {
   id: string;
   title: string;
-  isActive: boolean;
 }
 
 const tabs: ITab[] = [
   {
      id: 'bun',
      title: 'Булки',
-     isActive: true,
   },
   {
      id: 'main',
      title: 'Начинки',
-     isActive: false,
   },
   {
      id: 'sauce',
      title: 'Соусы',
-     isActive: false,
   }
 ]
 

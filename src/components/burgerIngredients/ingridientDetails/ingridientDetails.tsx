@@ -1,13 +1,13 @@
-import { IIngredient } from "../../api/types"
 import IngridientNutritionList from "../ingridientNutrition/ingridientNutritionList";
 import styles from './ingridientDetails.module.css';
-interface IngridientDetailsProps {
-  ingridient: IIngredient | null
-}
+import { useSelector } from "react-redux";
+import { ApplicationState } from "../../../services/store/store";
 
-export default function IngridientDetails(props: IngridientDetailsProps) {
-    const { ingridient } = props;
+
+export default function IngridientDetails() {
+    const ingridient = useSelector((state: ApplicationState) => state.currentIngredient.currentIngredient);
     if (!ingridient) return null;
+
     return (
         <article className={styles.ingridientDetails}>
           <img className={styles.ingridientDetailsImage} src={ingridient.image_large} alt={ingridient.name} />

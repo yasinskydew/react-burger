@@ -1,23 +1,31 @@
 import BurgerComponent from '../burgerComponent/burgerComponent';
 import styles from './burgerComponentList.module.css'
-import { IIngredient } from '../../api/types';
+import { IIngredient, IOrderPosition } from '../../../services/types';
+import { useOrder } from '../../../services/store/hooks/useOrder';
+import { useDispatch } from 'react-redux';
+import { removeIngridient } from '../../../services/reducers/order';
 
 export interface BurgerComponentListProps {
-  ingredients: IIngredient[];
+  ingredients: Map<string, IOrderPosition>;
   deleteIngridient: (ingredient: IIngredient) => void
 }
 
-export default function BurgerComponentList({
-  ingredients,
-  deleteIngridient
-}: BurgerComponentListProps) {
+export default function BurgerComponentList() {
+  const dispatch = useDispatch();
+
+  const { items } = useOrder();
   return (
     <div className={styles.burgerComponentList}>
-      {ingredients.map((item) => {
+      {Object.values(items).map((item, index) => {
         return (
-          <BurgerComponent key={item._id} positionType={item.positionType} isLocked={!!item.positionType} handleClose={() => {
-            deleteIngridient(item)
-          }} {...item} />
+          <BurgerComponent 
+            key={item.id} 
+            positionType={item.positionType} 
+            isLocked={!!item.positionType} 
+            handleClose={() => dispatch(removeIngridient(item))} 
+            index={index}
+            {...item} 
+          />
         )
       })}
     </div>

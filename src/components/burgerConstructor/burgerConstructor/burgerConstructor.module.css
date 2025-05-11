@@ -6,6 +6,13 @@
   gap: 16px;
   min-height: calc(100vh - 300px);
 }
+
+.burgerConstructorContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 .burgerConstructorBottoms {
   display: flex;
   flex-direction: row;
