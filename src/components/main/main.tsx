@@ -10,16 +10,21 @@ import { IIngredient } from '../../services/types';
 
 
 export default function Main() {
-    const { data: ingredientsData } = useGetIngridientsQuery()
-    const { setupIngredients, setDefaultBun } = useIngredients();
+    const { data: ingredientsData, isLoading, isError } = useGetIngridientsQuery()
+    const { setDefaultBun } = useIngredients();
 
     useEffect(() => {
+        if(isLoading) {
+            return;
+        }
+        if(isError) {
+            return;
+        }
         if (ingredientsData && ingredientsData.success) {
-            setupIngredients(ingredientsData.data);
             setDefaultBun(ingredientsData.data.find(ingredient => ingredient.type === 'bun') as IIngredient);
         }
         
-    }, [ingredientsData, setupIngredients, setDefaultBun]);
+    }, [ingredientsData, setDefaultBun, isLoading, isError]);
 
     return (
         <main className={styles.main}>

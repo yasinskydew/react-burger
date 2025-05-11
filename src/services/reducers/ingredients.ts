@@ -1,5 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { IIngredient } from '../types';
+import { inigridientApiSlice } from '../api/ingridient';
 
 interface IngredientsState {
   items: IIngredient[];
@@ -16,21 +17,33 @@ const initialState: IngredientsState = {
 const ingredientsSlice = createSlice({
   name: 'ingredients',
   initialState,
-  reducers: {
-    setIngredients: (state, action: PayloadAction<IIngredient[]>) => {
-      state.items = action.payload;
-      state.loading = false;
-      state.error = null;
-    },
-    setLoading: (state, action: PayloadAction<boolean>) => {
-      state.loading = action.payload;
-    },
-    setError: (state, action: PayloadAction<string>) => {
-      state.error = action.payload;
-      state.loading = false;
-    },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addMatcher(
+        inigridientApiSlice.endpoints.getIngridients.matchPending,
+        (state) => {
+          state.loading = true;
+          state.error = null;
+          state.items = [];
+        }
+      )
+      .addMatcher(
+        inigridientApiSlice.endpoints.getIngridients.matchFulfilled,
+        (state, action) => {
+          state.items = action.payload.data;
+          state.loading = false;
+          state.error = null;
+        }
+      )
+      .addMatcher(
+        inigridientApiSlice.endpoints.getIngridients.matchRejected,
+        (state, action) => {
+          state.loading = false;
+          state.error = action.error.message || 'Failed to fetch ingredients';
+        }
+      );
   }
 });
 
-export const { setIngredients, setLoading, setError } = ingredientsSlice.actions;
 export default ingredientsSlice.reducer; 

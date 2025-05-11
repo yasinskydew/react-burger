@@ -27,9 +27,8 @@ export default function BurgerColumnItem({ onClick, ...ingredient }: BurgerColum
     const bun = getBun();
 
     const getCount = () => {
-        if(ingredient._id === bun._id) {
-            return 2;
-        }
+        if(!ingredient || !bun)  return 0;
+        if(ingredient._id === bun._id) return 2;
         const count = items.filter(item => item._id === ingredient._id).length || 0;
         return count;
     }
