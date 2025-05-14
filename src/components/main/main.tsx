@@ -7,6 +7,7 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useIngredients } from '../../services/store/hooks';
 import { IIngredient } from '../../services/types';
+import { Loader } from '../loader/loader';
 
 
 export default function Main() {
@@ -26,6 +27,9 @@ export default function Main() {
         
     }, [ingredientsData, setDefaultBun, isLoading, isError]);
 
+    if(isLoading) {
+        return <Loader />
+    }
     return (
         <main className={styles.main}>
             <DndProvider backend={HTML5Backend}>

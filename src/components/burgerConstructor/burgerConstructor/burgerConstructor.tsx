@@ -11,15 +11,19 @@ import { useDrop } from 'react-dnd';
 import { DragItemTypes, IIngredient } from '../../../services/types';
 import { addIngridient } from '../../../services/reducers/order';
 import { useDispatch } from 'react-redux';
+import { Loader } from '../../loader/loader';
 
 export default function BurgerConstructor() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const { items, totalPrice, createOrder } = useOrder();
   const dispatch = useDispatch();
 
   const handleOpenModal = async () => {
+    setIsLoading(true);
     await createOrder();
     setIsModalOpen(true)
+    setIsLoading(false);
   };
   
   const handleCloseModal = () => setIsModalOpen(false);
@@ -43,6 +47,9 @@ export default function BurgerConstructor() {
   });
   drop(dropRef);
 
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <section className={styles.burgerConstructor}>
       <div className={styles.burgerConstructorContent} ref={dropRef}>
