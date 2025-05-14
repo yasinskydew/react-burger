@@ -14,6 +14,7 @@ import { RegistrationPage } from './pages/registration/registrationPage';
 import { ProfilePage } from './pages/profile/profiltePage';
 import { NotFoundPage } from './pages/notFound/notFoundPage';
 import ProtectedRoute from './components/protectedRoute/protectedRoute';
+import IngridientDetailsPage from './pages/ingridientDetails/ingredientDetailsPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -32,6 +33,7 @@ root.render(
                 <Route element={<ProtectedRoute />}>
                     <Route path='/profile' element={<ProfilePage />} />
                 </Route>
+                <Route path='/ingredients/:id' element={<IngridientDetailsPage />} />
                 <Route path='*' element={<NotFoundPage />} />
             </Route>
         </Routes>

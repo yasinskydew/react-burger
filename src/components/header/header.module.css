@@ -3,21 +3,6 @@
     max-width: 1920px;
 }
 
-.header_button {
-    align-items: center;
-    display: flex;
-    gap: 8px;
-    padding: 16px 20px;
-}
-
-.header_button_text {
-    color: white;
-}
-
-.header_button_text_secondary {
-    color: var(--text-inactive-color);
-}
-
 .container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
