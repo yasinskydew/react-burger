@@ -4,7 +4,7 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux'
 import { store } from './services/store/store'
-import { BrowserRouter, Route, Routes } from 'react-router';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { PageLayout } from './components/layouts/pageLayout';
 import { HomePage } from './pages/home/homePage';
 import { LoginPage } from './pages/login/loginPage';
@@ -13,6 +13,7 @@ import { SignInPage } from './pages/signIn/signInPage';
 import { RegistrationPage } from './pages/registration/registrationPage';
 import { ProfilePage } from './pages/profile/profiltePage';
 import { NotFoundPage } from './pages/notFound/notFoundPage';
+import ProtectedRoute from './components/protectedRoute/protectedRoute';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -28,7 +29,9 @@ root.render(
                 <Route path='/sign-in' element={<SignInPage />} />
                 <Route path='/registration' element={<RegistrationPage />} />
                 <Route path='/forgot-password' element={<ForgotPasswordPage />} />
-                <Route path='/profile' element={<ProfilePage />} />
+                <Route element={<ProtectedRoute />}>
+                    <Route path='/profile' element={<ProfilePage />} />
+                </Route>
                 <Route path='*' element={<NotFoundPage />} />
             </Route>
         </Routes>
