@@ -10,12 +10,12 @@ import { HomePage } from './pages/home/homePage';
 import { LoginPage } from './pages/login/loginPage';
 import { ForgotPasswordPage } from './pages/forgotPassword/forgotPasswordPage';
 import { SignInPage } from './pages/signIn/signInPage';
-import { RegistrationPage } from './pages/registration/registrationPage';
 import { ProfilePage } from './pages/profile/profilePage';
 import { NotFoundPage } from './pages/notFound/notFoundPage';
 import ProtectedRoute from './components/protectedRoute/protectedRoute';
 import IngridientDetailsPage from './pages/ingridientDetails/ingredientDetailsPage';
 import { OrderHistoryPage } from './pages/orderHistory/orderHistoryPage';
+import { ConfirmationPage } from './pages/confirmation/confirmationPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -29,8 +29,8 @@ root.render(
                 <Route path='/' element={<HomePage />} />
                 <Route path='/login' element={<LoginPage />} />
                 <Route path='/sign-in' element={<SignInPage />} />
-                <Route path='/registration' element={<RegistrationPage />} />
                 <Route path='/forgot-password' element={<ForgotPasswordPage />} />
+                <Route path='/confirmation' element={<ConfirmationPage />} />
                 <Route element={<ProtectedRoute />}>
                     <Route path='/profile' element={<ProfilePage />} />
                 </Route>

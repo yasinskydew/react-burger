@@ -29,7 +29,6 @@ export const ProfileUserInput = (props: ProfileUserInputProps) => {
       }}
       size={'default'}
       disabled={isDisabled}
-      width='600px'
       onPointerEnterCapture={(e: React.MouseEvent<HTMLInputElement>) => {
         console.log(e);
       }}

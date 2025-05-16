@@ -1,0 +1,15 @@
+.links_container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 80px;
+}
+
+.link {
+    color: #4C4CFF;
+    text-decoration: none;
+}
+
+.link:hover {
+    opacity: 0.8;
+} 
