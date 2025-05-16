@@ -15,7 +15,7 @@ export default function AppHeader() {
                     <HeaderNavButton 
                         Icon={ListIcon} 
                         text="Лента заказов" 
-                        path="/feed" 
+                        path="/order-history" 
                     />
                 </div>
                 <div className={styles.header_logo}>

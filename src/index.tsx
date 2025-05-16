@@ -11,10 +11,11 @@ import { LoginPage } from './pages/login/loginPage';
 import { ForgotPasswordPage } from './pages/forgotPassword/forgotPasswordPage';
 import { SignInPage } from './pages/signIn/signInPage';
 import { RegistrationPage } from './pages/registration/registrationPage';
-import { ProfilePage } from './pages/profile/profiltePage';
+import { ProfilePage } from './pages/profile/profilePage';
 import { NotFoundPage } from './pages/notFound/notFoundPage';
 import ProtectedRoute from './components/protectedRoute/protectedRoute';
 import IngridientDetailsPage from './pages/ingridientDetails/ingredientDetailsPage';
+import { OrderHistoryPage } from './pages/orderHistory/orderHistoryPage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -33,6 +34,7 @@ root.render(
                 <Route element={<ProtectedRoute />}>
                     <Route path='/profile' element={<ProfilePage />} />
                 </Route>
+                <Route path='/order-history' element={<OrderHistoryPage />} />
                 <Route path='/ingredients/:id' element={<IngridientDetailsPage />} />
                 <Route path='*' element={<NotFoundPage />} />
             </Route>
