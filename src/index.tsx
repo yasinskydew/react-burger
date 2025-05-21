@@ -12,7 +12,7 @@ import { ForgotPasswordPage } from './pages/forgotPassword/forgotPasswordPage';
 import { SignInPage } from './pages/signIn/signInPage';
 import { ProfilePage } from './pages/profile/profilePage';
 import { NotFoundPage } from './pages/notFound/notFoundPage';
-import ProtectedRoute from './components/protectedRoute/protectedRoute';
+import { ProtectedRoute } from './components/protectedRoute/protectedRoute';
 import IngridientDetailsPage from './pages/ingridientDetails/ingredientDetailsPage';
 import { OrderHistoryPage } from './pages/orderHistory/orderHistoryPage';
 import { ConfirmationPage } from './pages/confirmation/confirmationPage';
@@ -26,7 +26,9 @@ root.render(
       <BrowserRouter>
         <Routes>
             <Route element={<PageLayout />}>
-                <Route path='/' element={<HomePage />} />
+                <Route element={<ProtectedRoute />}>
+                    <Route path='/' element={<HomePage />} />
+                </Route>
                 <Route path='/login' element={<LoginPage />} />
                 <Route path='/sign-in' element={<SignInPage />} />
                 <Route path='/forgot-password' element={<ForgotPasswordPage />} />

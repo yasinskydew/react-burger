@@ -1,5 +1,7 @@
 import styles from './profileUser.module.css';
 import { ProfileUserInput } from '../profileUserInput/profileUserInput';
+import { ApplicationState } from '../../../services/store/store';
+import { useSelector } from 'react-redux';
 
 export interface userPropertyInterface {
   value: string;
@@ -11,10 +13,12 @@ export interface userPropertyInterface {
 }
 
 export const ProfileUser = () => {
-  const user: userPropertyInterface[] = [
+  const { user } = useSelector((state: ApplicationState) => state.userSliceReducer);
+  
+  const userProperty: userPropertyInterface[] = [
     {
       name: 'name',
-      value: 'John Doe',
+      value: user?.name || '',
       placeholder: 'Имя',
       type: 'text',
       icon: 'EditIcon',
@@ -22,7 +26,7 @@ export const ProfileUser = () => {
     },
     {
       name: 'email',
-      value: 'john.doe@example.com',
+      value: user?.email || '',
       placeholder: 'E-mail',
       type: 'email',
       icon: 'EditIcon',
@@ -41,7 +45,7 @@ export const ProfileUser = () => {
   return (
     <div className={styles.profile_user}>
       {
-        user.map((user) => (
+        userProperty.map((user) => (
           <ProfileUserInput
             key={user.name}
             inputProperty={user}
