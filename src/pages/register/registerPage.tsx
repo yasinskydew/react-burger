@@ -1,6 +1,6 @@
 import { EmailInput, PasswordInput, Button, Input } from "@ya.praktikum/react-developer-burger-ui-components"
 import { ModalWrapper } from "../../components/modalWrapper/modalWrapper"
-import styles from './signInPage.module.css';
+import styles from './registerPage.module.css';
 import { useRef, useState } from "react";
 import { useRegisterMutation } from "../../services/api/auth";
 import { Loader } from "../../components/loader/loader";
@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import { ApplicationState } from "../../services/store/store";
 import { useNavigate } from "react-router-dom";
 
-export const SignInPage = () => {
+export const RegisterPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
@@ -50,7 +50,7 @@ export const SignInPage = () => {
   return (
     <ModalWrapper title="Регистрация" links={links}>
       <form>
-        <div className={styles.sign_in_form}>
+        <div className={styles.register_form}>
           <Input
             type='text'
             name='name'

@@ -10,6 +10,7 @@
 
 .profile_menu_item {
     color: var(--text-inactive-color);
+    cursor: pointer;
 }
 
 .profile_menu_item_active {

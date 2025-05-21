@@ -87,13 +87,6 @@ const userSlice = createSlice({
         TokenManager.deleteRefreshToken();
       }
     )
-    .addMatcher(
-      authApiSlice.endpoints.logout.matchRejected,
-      (state, action) => {
-        state.error = action.error.message || null;
-        state.user = null;
-      }
-    )
   }
 });
 

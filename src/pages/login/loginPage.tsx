@@ -18,7 +18,7 @@ export const LoginPage = () => {
         {
             text: "Вы — новый пользователь?",
             linkText: "Зарегистрироваться",
-            to: "/sign-in"
+            to: "/register"
         },
         {
             text: "Забыли пароль?",
@@ -38,7 +38,7 @@ export const LoginPage = () => {
     if (isLoading) {
         return <Loader />
     }
-    
+
     if (isError) {
         return <div>Error: {error}</div>
     }

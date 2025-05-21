@@ -2,6 +2,7 @@ import styles from './profileUser.module.css';
 import { ProfileUserInput } from '../profileUserInput/profileUserInput';
 import { ApplicationState } from '../../../services/store/store';
 import { useSelector } from 'react-redux';
+import { useState } from 'react';
 
 export interface userPropertyInterface {
   value: string;
@@ -12,13 +13,25 @@ export interface userPropertyInterface {
   name: string;
 }
 
+interface IUserData {
+  name: string;
+  email: string;
+  password: string;
+}
+
 export const ProfileUser = () => {
   const { user } = useSelector((state: ApplicationState) => state.userSliceReducer);
+
+  const [userData, setUserData] = useState<IUserData>({
+    name: user?.name || '',
+    email: user?.email || '',
+    password: '',
+  });
   
   const userProperty: userPropertyInterface[] = [
     {
       name: 'name',
-      value: user?.name || '',
+      value: userData?.name || '',
       placeholder: 'Имя',
       type: 'text',
       icon: 'EditIcon',
@@ -26,7 +39,7 @@ export const ProfileUser = () => {
     },
     {
       name: 'email',
-      value: user?.email || '',
+      value: userData?.email || '',
       placeholder: 'E-mail',
       type: 'email',
       icon: 'EditIcon',
@@ -49,9 +62,12 @@ export const ProfileUser = () => {
           <ProfileUserInput
             key={user.name}
             inputProperty={user}
-            isDisabled={true}
-            setIsDisabled={() => {}}
-            setInputProperty={() => {}}
+            setInputProperty={(inputProperty) => {
+              setUserData({
+                ...userData,
+                [inputProperty.name]: inputProperty.value,
+              })
+            }}
           />
         ))
       }

@@ -1,16 +1,15 @@
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { userPropertyInterface } from "../profileUser/profileUser";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 interface ProfileUserInputProps {
   inputProperty: userPropertyInterface;
   setInputProperty: (inputProperty: userPropertyInterface) => void;
-  isDisabled: boolean;
-  setIsDisabled: (isDisabled: boolean) => void;
 }
 
 export const ProfileUserInput = (props: ProfileUserInputProps) => {
-  const { inputProperty, setInputProperty, isDisabled, setIsDisabled } = props;
+  const { inputProperty, setInputProperty } = props;
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const inputRef = useRef<HTMLInputElement>(null);
 

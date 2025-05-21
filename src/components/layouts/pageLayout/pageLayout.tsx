@@ -1,6 +1,6 @@
 import { Outlet } from "react-router";
-import AppHeader from "../header/header";
 import styles from './pageLayout.module.css';
+import AppHeader from "../../header/header";
 
 export const PageLayout = () => {
     return (

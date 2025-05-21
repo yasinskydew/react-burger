@@ -8,8 +8,8 @@ import { TokenManager } from '../../services/utils/tokenManager';
 import { Loader } from "../loader/loader";
 
 export const ProtectedRoute = () => {
-  const { user, error } = useSelector((state: ApplicationState) => state.userSliceReducer);
   const token = TokenManager.getAccessToken();
+  const { user, error } = useSelector((state: ApplicationState) => state.userSliceReducer);
   const { isLoading, isError } = useGetUserQuery(undefined, {
     skip: !token || !!user
   });
