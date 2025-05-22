@@ -6,4 +6,6 @@ export enum EndpointNames {
     AUTH_GET_USER = 'getUser',
     AUTH_LOGOUT = 'logout',
     AUTH_UPDATE_USER = 'updateUser',
+    AUTH_RESET_PASSWORD = 'resetPassword',
+    AUTH_RESET_PASSWORD_CONFIRM = 'resetPasswordConfirm',
 }

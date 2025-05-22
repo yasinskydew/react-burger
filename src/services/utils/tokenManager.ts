@@ -60,4 +60,16 @@ export class TokenManager {
   static deleteAccessToken() {
     localStorage.removeItem('accessToken');
   }
+
+  static setIsResetPassword(isResetPassword: boolean) {
+    if (isResetPassword === false) {
+      localStorage.removeItem('isResetPassword');
+    } else {
+      localStorage.setItem('isResetPassword', isResetPassword.toString());
+    }
+  }
+
+  static getIsResetPassword() {
+    return Boolean(localStorage.getItem('isResetPassword'));
+  }
 }

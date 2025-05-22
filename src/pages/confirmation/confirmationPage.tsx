@@ -2,10 +2,16 @@ import { ModalWrapper } from "../../components/modalWrapper/modalWrapper"
 import { Button, PasswordInput, Input } from "@ya.praktikum/react-developer-burger-ui-components"
 import styles from './confirmationPage.module.css';
 import { useRef, useState } from "react";
+import { TokenManager } from "../../services/utils/tokenManager";
+import { Loader } from "../../components/loader/loader";
+import { useNavigate } from "react-router-dom";
+import { useResetPasswordConfirmMutation } from "../../services/api/auth";
 
 export const ConfirmationPage = () => {
     const [password, setPassword] = useState('');
     const [code, setCode] = useState('');
+    const navigate = useNavigate();
+    const [resetPasswordConfirm, { isLoading }] = useResetPasswordConfirmMutation();
     
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -16,6 +22,21 @@ export const ConfirmationPage = () => {
             to: "/login"
         },
     ];
+
+    const handleSubmit = async () => {
+        if (!password || !code) {
+            return;
+        }
+        const response = await resetPasswordConfirm({ password, token: code });
+        if (response.data?.success) {
+            TokenManager.setIsResetPassword(false);
+            navigate('/login');
+        }
+    }
+
+    if (isLoading) {
+        return <Loader />
+    }
 
     return (
         <ModalWrapper title="Восстановление пароля" links={links}>
@@ -40,7 +61,7 @@ export const ConfirmationPage = () => {
                       console.log(e);
                   }}
               />
-              <Button type='primary' size='medium' htmlType='submit'>
+              <Button type='primary' size='medium' htmlType='submit' onClick={handleSubmit}>
                   Восстановить
               </Button>
            </form>

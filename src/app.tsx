@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation } from 'react-router';
+import { Navigate, Route, Routes, useLocation } from 'react-router';
 import { PageLayout } from './components/layouts/pageLayout/pageLayout';
 import { HomePage } from './pages/home/homePage';
 import { LoginPage } from './pages/login/loginPage';
@@ -20,11 +20,13 @@ import { Loader } from './components/loader/loader';
 import { IIngredient } from './services/types';
 import { useGetIngridientsQuery } from './services/api/ingridient';
 import IngridientDetailsPage from './pages/ingridientDetails/ingredientDetailsPage';
+import { TokenManager } from './services/utils/tokenManager';
 
 export const App = () => {
   const location = useLocation();
   const background = location.state && location.state.background;
   const { isIngredientModalOpen, setIsIngredientModalOpen } = useIngredients();
+  const isResetPassword = TokenManager.getIsResetPassword();
 
   const { data: ingredientsData, isLoading, isError } = useGetIngridientsQuery()
   const { setDefaultBun } = useIngredients();
@@ -42,6 +44,7 @@ export const App = () => {
       
   }, [ingredientsData, setDefaultBun, isLoading, isError]);
 
+  
   if (isLoading) {
       return <Loader />
   }
@@ -56,7 +59,7 @@ export const App = () => {
               <Route path='/login' element={<LoginPage />} />
               <Route path='/register' element={<RegisterPage />} />
               <Route path='/forgot-password' element={<ForgotPasswordPage />} />
-              <Route path='/confirmation' element={<ConfirmationPage />} />
+              <Route path='/reset-password' element={<ConfirmationPage />} />
           </Route>
           <Route element={<ProtectedRoute />}>
             <Route path='/order-history' element={<OrderHistoryPage />} />
@@ -68,6 +71,7 @@ export const App = () => {
           <Route path='*' element={<NotFoundPage />} />
         </Route>
       </Routes>
+      {isResetPassword && <Navigate to="/reset-password" replace={true} />}
       {background && <Routes>
         <Route path='/ingredients/:id' element={
           <Modal 

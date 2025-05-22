@@ -33,6 +33,20 @@ export interface ILogout {
     token: string;
 }
 
+export interface IResetPassword {
+    email: string;
+}
+
+export interface IResetPasswordResponse {
+    success: boolean;
+    message: string;
+}
+
+export interface IResetPasswordConfirm {
+    password: string;
+    token: string;
+}
+
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation<ILoginResponse, ILogin>({
@@ -67,7 +81,25 @@ export const authApiSlice = apiSlice.injectEndpoints({
         },
       }),
     }),
+    resetPassword: builder.mutation<IResetPasswordResponse, IResetPassword>({
+      query: (resetPassword) => ({
+        url: ApiEndpoints.RESET_PASSWORD,
+        method: 'POST',
+        apiGroupName: ApiGroupNames.AUTH,
+        name: EndpointNames.AUTH_RESET_PASSWORD,
+        body: resetPassword,
+      }),
+    }),
+    resetPasswordConfirm: builder.mutation<IResetPasswordResponse, IResetPasswordConfirm>({
+      query: (resetPasswordConfirm) => ({
+        url: ApiEndpoints.RESET_PASSWORD_CONFIRM,
+        method: 'POST',
+        apiGroupName: ApiGroupNames.AUTH,
+        name: EndpointNames.AUTH_RESET_PASSWORD_CONFIRM,
+        body: resetPasswordConfirm,
+      }),
+    }),
   })
 })
 
-export const { useLoginMutation, useRegisterMutation, useLogoutMutation } = authApiSlice;
+export const { useLoginMutation, useRegisterMutation, useLogoutMutation, useResetPasswordMutation, useResetPasswordConfirmMutation } = authApiSlice;
