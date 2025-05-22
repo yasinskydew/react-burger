@@ -2,7 +2,7 @@ import styles from './profileUser.module.css';
 import { ProfileUserInput } from '../profileUserInput/profileUserInput';
 import { ApplicationState } from '../../../services/store/store';
 import { useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { IUserDataUpdate, useUpdateUserMutation } from '../../../services/api/user';
 import { Loader } from '../../loader/loader';
