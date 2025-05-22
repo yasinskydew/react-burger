@@ -47,7 +47,7 @@ export const App = () => {
   }
   
   return (
-    <div>
+    <>
       <Routes location={background || location}>
         <Route element={<PageLayout />}>   
           <Route path='/' element={<HomePage />} />
@@ -79,6 +79,6 @@ export const App = () => {
           </Modal>
         } />
       </Routes>}
-    </div>
+    </>
   )
 }

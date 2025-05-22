@@ -5,4 +5,5 @@ export enum EndpointNames {
     AUTH_REGISTER = 'register',
     AUTH_GET_USER = 'getUser',
     AUTH_LOGOUT = 'logout',
+    AUTH_UPDATE_USER = 'updateUser',
 }

@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { authApiSlice } from '../api/auth';
 import { TokenManager } from '../utils/tokenManager';
+import { userApiSlice } from '../api/user';
 
 interface UserState {
   user: {
@@ -65,16 +66,35 @@ const userSlice = createSlice({
       }
     )
     .addMatcher(
-      authApiSlice.endpoints.getUser.matchRejected,
+      userApiSlice.endpoints.getUser.matchRejected,
       (state, action) => {
         state.error = action.error.message || null;
         state.user = null;
       }
     )
     .addMatcher(
-      authApiSlice.endpoints.getUser.matchFulfilled,
+      userApiSlice.endpoints.getUser.matchFulfilled,
       (state, action) => {
         state.user = action.payload.user;
+        state.error = null;
+      }
+    )
+    .addMatcher(
+      userApiSlice.endpoints.updateUser.matchFulfilled,
+      (state, action) => {
+        state.user = action.payload.user;
+        state.error = null;
+      }
+    )
+    .addMatcher(
+      userApiSlice.endpoints.updateUser.matchRejected,
+      (state, action) => {
+        state.error = action.error.message || null;
+      }
+    )
+    .addMatcher(
+      userApiSlice.endpoints.updateUser.matchPending,
+      (state, action) => {
         state.error = null;
       }
     )

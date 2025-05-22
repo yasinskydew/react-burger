@@ -3,11 +3,7 @@ import { ApiEndpoints } from "./constants/api";
 import { ApiGroupNames } from "./constants/api-group-names";
 import { EndpointNames } from "./constants/endpoint-names";
 import { apiSlice } from "./create-api";
-
-export interface IUser {
-    name: string;
-    email: string;
-}
+import { IUser } from "./user";
 
 export interface ILoginResponse {
     success: boolean;
@@ -26,12 +22,6 @@ export interface IRegister {
     name: string;
     email: string;
     password: string;
-}
-
-export interface IGetUserResponse {
-    success: boolean;
-    message: string;
-    user: IUser;
 }
 
 export interface ILogoutResponse {
@@ -63,17 +53,6 @@ export const authApiSlice = apiSlice.injectEndpoints({
         body: register,
       }),
     }),
-    getUser: builder.query<IGetUserResponse, void>({
-      query: () => ({
-        url: ApiEndpoints.USER,
-        method: 'GET',
-        apiGroupName: ApiGroupNames.AUTH,
-        name: EndpointNames.AUTH_GET_USER,
-        headers: {
-          Authorization: `Bearer ${TokenManager.getAccessToken()}`,
-        },
-      }),
-    }),
     logout: builder.mutation<ILogoutResponse, ILogout>({
       query: () => ({
         url: ApiEndpoints.LOGOUT,
@@ -91,4 +70,4 @@ export const authApiSlice = apiSlice.injectEndpoints({
   })
 })
 
-export const { useLoginMutation, useRegisterMutation, useGetUserQuery, useLogoutMutation } = authApiSlice;
+export const { useLoginMutation, useRegisterMutation, useLogoutMutation } = authApiSlice;

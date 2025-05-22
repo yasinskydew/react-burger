@@ -2,18 +2,19 @@ import styles from './profileUser.module.css';
 import { ProfileUserInput } from '../profileUserInput/profileUserInput';
 import { ApplicationState } from '../../../services/store/store';
 import { useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
+import { IUserDataUpdate, useUpdateUserMutation } from '../../../services/api/user';
+import { Loader } from '../../loader/loader';
 
 export interface userPropertyInterface {
-  value: string;
   placeholder: string;
   type: string;
-  icon: string;
   inputMode: string;
   name: string;
 }
 
-interface IUserData {
+export interface IUserData {
   name: string;
   email: string;
   password: string;
@@ -21,6 +22,7 @@ interface IUserData {
 
 export const ProfileUser = () => {
   const { user } = useSelector((state: ApplicationState) => state.userSliceReducer);
+  const [updateUser, { isLoading }] = useUpdateUserMutation();
 
   const [userData, setUserData] = useState<IUserData>({
     name: user?.name || '',
@@ -31,46 +33,76 @@ export const ProfileUser = () => {
   const userProperty: userPropertyInterface[] = [
     {
       name: 'name',
-      value: userData?.name || '',
       placeholder: 'Имя',
       type: 'text',
-      icon: 'EditIcon',
       inputMode: 'text',
     },
     {
       name: 'email',
-      value: userData?.email || '',
       placeholder: 'E-mail',
       type: 'email',
-      icon: 'EditIcon',
       inputMode: 'email',
     },
     {
       name: 'password',
-      value: 'password',
       placeholder: 'Пароль',
       type: 'password',
-      icon: 'EditIcon',
-      inputMode: 'password',
+      inputMode: 'text',
     },
   ]
 
+  useEffect(() => {
+    console.log(userData);
+  }, [userData]);
+
+  const handleReset = () => {
+    setUserData({
+      name: user?.name || '',
+      email: user?.email || '',
+      password: '',
+    });
+  }
+
+  const handleSave = () => {
+    const userDataUpdate: IUserDataUpdate = {
+      name: userData.name,
+      email: userData.email,
+      password: userData.password || undefined,
+    }
+    updateUser(userDataUpdate);
+  }
+
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <div className={styles.profile_user}>
-      {
-        userProperty.map((user) => (
-          <ProfileUserInput
-            key={user.name}
-            inputProperty={user}
-            setInputProperty={(inputProperty) => {
-              setUserData({
-                ...userData,
-                [inputProperty.name]: inputProperty.value,
-              })
-            }}
-          />
-        ))
-      }
+      <div className={styles.profile_user_inputs}>
+        {
+          userProperty.map((user) => (
+            <ProfileUserInput
+              key={user.name}
+              userData={userData}
+              inputProperty={user}
+              setData={(name, value) => {
+                setUserData({
+                  ...userData,
+                  [name]: value,
+                })
+              }}
+            />
+          ))
+        }
+      </div>
+      <div className={styles.profile_user_buttons}>
+        <Button htmlType='submit' type='secondary' size="large" onClick={handleReset}>
+          Отмена
+        </Button>
+        <Button htmlType='button' type='primary' size="large" onClick={handleSave}>
+          Сохранить
+        </Button>
+      </div>
+
     </div>
   )
 }

@@ -3,13 +3,13 @@ import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { ApplicationState } from "../../services/store/store";
-import { useGetUserQuery } from "../../services/api/auth";
 import { TokenManager } from '../../services/utils/tokenManager';
 import { Loader } from "../loader/loader";
+import { useGetUserQuery } from "../../services/api/user";
 
 export const ProtectedRoute = () => {
   const token = TokenManager.getAccessToken();
-  const { user, error } = useSelector((state: ApplicationState) => state.userSliceReducer);
+  const { user } = useSelector((state: ApplicationState) => state.userSliceReducer);
   const { isLoading, isError } = useGetUserQuery(undefined, {
     skip: !token || !!user
   });
@@ -19,7 +19,8 @@ export const ProtectedRoute = () => {
   }
 
   if (isError) {
-    return <div>Error: {error}</div>
+    TokenManager.deleteAccessToken();
+    return <Navigate to="/login" />
   }
   
   return (user ? <Outlet /> : <Navigate to="/login" replace={true} />)
