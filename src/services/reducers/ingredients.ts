@@ -6,18 +6,24 @@ interface IngredientsState {
   items: IIngredient[];
   loading: boolean;
   error: string | null;
+  isIngredientModalOpen: boolean;
 }
 
 const initialState: IngredientsState = {
   items: [],
   loading: false,
   error: null,
+  isIngredientModalOpen: false,
 };
 
 const ingredientsSlice = createSlice({
   name: 'ingredients',
   initialState,
-  reducers: {},
+  reducers: {
+    setIsIngredientModalOpenReducer: (state, action) => {
+      state.isIngredientModalOpen = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addMatcher(
@@ -46,4 +52,5 @@ const ingredientsSlice = createSlice({
   }
 });
 
+export const { setIsIngredientModalOpenReducer } = ingredientsSlice.actions;
 export default ingredientsSlice.reducer; 

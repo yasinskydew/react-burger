@@ -7,7 +7,10 @@
   width: 272px;
   height: 208px;
   position: relative;
+  text-decoration: none;
+  color: inherit;
 }
 .title {
   text-align: center;
+  text-decoration: none;
 }

@@ -1,12 +1,13 @@
-import { useParams } from 'react-router-dom';
+import IngridientDetails from '../../components/burgerIngredients/ingridientDetails/ingridientDetails';
+import styles from './ingredientDetailsPage.module.css';
 
 export default function IngridientDetailsPage() {
-  const { id } = useParams();
-
+  
+  
   return (
-    <div>
-      <h1>Ingridient Details</h1>
-      <p>{id}</p>
+    <div className={styles.ingredientDetailsPage}>
+      <h2 className={styles.ingredientDetailsPageTitle + ' text_type_main-medium'}>Детали ингредиента</h2>
+      <IngridientDetails />
     </div>
   )
 }
