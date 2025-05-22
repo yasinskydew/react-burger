@@ -8,3 +8,5 @@ export enum ApiEndpoints {
     RESET_PASSWORD = '/password-reset',
     RESET_PASSWORD_CONFIRM = '/password-reset/reset',
 }
+
+export const BASE_URL = 'https://norma.nomoreparties.space/api';
