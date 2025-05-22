@@ -51,10 +51,6 @@ export const ProfileUser = () => {
     },
   ]
 
-  useEffect(() => {
-    console.log(userData);
-  }, [userData]);
-
   const handleReset = () => {
     setUserData({
       name: user?.name || '',
