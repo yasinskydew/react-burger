@@ -29,7 +29,9 @@ export const ProfileUser = () => {
     email: user?.email || '',
     password: '',
   });
-  
+
+  const [isDisabled, setIsDisabled] = useState(true);
+
   const userProperty: userPropertyInterface[] = [
     {
       name: 'name',
@@ -57,6 +59,7 @@ export const ProfileUser = () => {
       email: user?.email || '',
       password: '',
     });
+    setIsDisabled(true);
   }
 
   const handleSave = () => {
@@ -66,6 +69,7 @@ export const ProfileUser = () => {
       password: userData.password || undefined,
     }
     updateUser(userDataUpdate);
+    setIsDisabled(true);
   }
 
   if (isLoading) {
@@ -85,20 +89,23 @@ export const ProfileUser = () => {
                   ...userData,
                   [name]: value,
                 })
+                setIsDisabled(false);
               }}
             />
           ))
         }
       </div>
-      <div className={styles.profile_user_buttons}>
-        <Button htmlType='submit' type='secondary' size="large" onClick={handleReset}>
+      {
+        !isDisabled && (
+          <div className={styles.profile_user_buttons}>
+            <Button htmlType='submit' type='secondary' size="large" onClick={handleReset}>
           Отмена
         </Button>
         <Button htmlType='button' type='primary' size="large" onClick={handleSave}>
-          Сохранить
-        </Button>
-      </div>
-
+            Сохранить
+          </Button>
+        </div>
+      )}
     </div>
   )
 }
