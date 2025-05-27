@@ -1,8 +1,7 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation, Navigate } from "react-router";
 import { useState, useEffect } from "react";
 
 import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
 import { ApplicationState } from "../../services/store/store";
 import { TokenManager } from '../../services/utils/tokenManager';
 import { Loader } from "../loader/loader";
@@ -10,6 +9,7 @@ import { useGetUserQuery } from "../../services/api/user";
 import { refreshToken } from "../../services/utils/api";
 
 export const ProtectedRoute = () => {
+  const location = useLocation();
   const token = TokenManager.getAccessToken();
   const { user } = useSelector((state: ApplicationState) => state.userSliceReducer);
   const { isLoading, isError } = useGetUserQuery(undefined, {
@@ -38,8 +38,8 @@ export const ProtectedRoute = () => {
   }
 
   if (refreshFailed) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/login" state={{ from: location }} />;
   }
 
-  return (user ? <Outlet /> : <Navigate to="/login" replace={true} />);
+  return (user ? <Outlet /> : <Navigate to="/login" state={{ from: location }} />);
 };

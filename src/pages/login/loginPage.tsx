@@ -5,7 +5,7 @@ import { ModalWrapper } from "../../components/modalWrapper/modalWrapper";
 import { useLoginMutation } from "../../services/api/auth";
 import { ApplicationState } from "../../services/store/store";
 import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router";
 import { Loader } from "../../components/loader/loader";
 
 export const LoginPage = () => {
@@ -13,6 +13,9 @@ export const LoginPage = () => {
     const [password, setPassword] = useState('');
     const { user, error } = useSelector((state: ApplicationState) => state.userSliceReducer);
     const [login, { isLoading, isError }] = useLoginMutation();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
 
     const links = [
         {
@@ -27,12 +30,13 @@ export const LoginPage = () => {
         }
     ];
 
-    const handleSubmit = () => {
-        login({ email, password });
+    const handleSubmit = async () => {
+        await login({ email, password })
+        navigate(from, { replace: true })
     }
 
     if (user) {
-        return <Navigate to="/" />
+        return <Navigate to={from} />
     }
 
     if (isLoading) {
