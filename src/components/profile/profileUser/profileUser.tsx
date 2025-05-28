@@ -76,7 +76,7 @@ export const ProfileUser = () => {
     return <Loader />;
   }
   return (
-    <div className={styles.profile_user}>
+    <form className={styles.profile_user} onSubmit={handleSave}>
       <div className={styles.profile_user_inputs}>
         {
           userProperty.map((user) => (
@@ -98,14 +98,14 @@ export const ProfileUser = () => {
       {
         !isDisabled && (
           <div className={styles.profile_user_buttons}>
-            <Button htmlType='submit' type='secondary' size="large" onClick={handleReset}>
-          Отмена
-        </Button>
-        <Button htmlType='button' type='primary' size="large" onClick={handleSave}>
-            Сохранить
-          </Button>
+            <Button htmlType='button' type='secondary' size="large" onClick={handleReset}>
+                Отмена
+            </Button>
+            <Button htmlType='submit' type='primary' size="large">
+                Сохранить
+            </Button>
         </div>
       )}
-    </div>
+    </form>
   )
 }
