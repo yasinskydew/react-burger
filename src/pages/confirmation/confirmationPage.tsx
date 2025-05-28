@@ -40,7 +40,7 @@ export const ConfirmationPage = () => {
 
     return (
         <ModalWrapper title="Восстановление пароля" links={links}>
-           <form className={styles.confirmation_form}>
+           <form className={styles.confirmation_form} onSubmit={handleSubmit}>
               <PasswordInput
                   name='password'
                   placeholder='Введите новый пароль'
@@ -61,7 +61,7 @@ export const ConfirmationPage = () => {
                       console.log(e);
                   }}
               />
-              <Button type='primary' size='medium' htmlType='submit' onClick={handleSubmit}>
+              <Button type='primary' size='medium' htmlType='submit'>
                   Восстановить
               </Button>
            </form>

@@ -49,7 +49,7 @@ export const LoginPage = () => {
 
     return (
         <ModalWrapper title="Вход" links={links}>
-            <form className={styles.login_form}>
+            <form className={styles.login_form} onSubmit={handleSubmit}>
                     <EmailInput
                     name='email'
                     placeholder='E-mail'
@@ -68,7 +68,6 @@ export const LoginPage = () => {
                     type='primary' 
                     size='medium' 
                     htmlType='submit'
-                    onClick={handleSubmit}
                 >
                     Войти
                 </Button>

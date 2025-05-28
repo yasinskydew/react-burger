@@ -34,14 +34,14 @@ export const ForgotPasswordPage = () => {
 
     return (
         <ModalWrapper title="Восстановление пароля" links={links}>
-           <form className={styles.forgot_password_form}>
+           <form className={styles.forgot_password_form} onSubmit={handleSubmit}>
                 <EmailInput
                     name='email'
                     placeholder='E-mail'
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                 />
-                <Button type='primary' size='medium' htmlType='submit' onClick={handleSubmit}>
+                <Button type='primary' size='medium' htmlType='submit'>
                     Восстановить
                 </Button>
            </form>
