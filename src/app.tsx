@@ -12,10 +12,7 @@ import { ProfileLayout } from './components/layouts/profileLayout/profileLayout'
 import { RegisterPage } from './pages/register/registerPage';
 import { ProfileOrdersPage } from './pages/profileOrders/profileOrdersPage';
 import { UnauthRoute } from './components/unauthRoute/unauthRoute';
-import Modal from './components/modal/modal';
 import { useEffect } from 'react';
-import IngridientDetails from './components/burgerIngredients/ingridientDetails/ingridientDetails';
-import { useIngredients } from './services/store/hooks';
 import { Loader } from './components/loader/loader';
 import { useGetIngridientsQuery } from './services/api/ingridient';
 import IngridientDetailsPage from './pages/ingridientDetails/ingredientDetailsPage';
@@ -23,11 +20,11 @@ import { TokenManager } from './services/utils/tokenManager';
 import { useSelector } from 'react-redux';
 import { ApplicationState } from './services/store/store';
 import { useGetUserQuery } from './services/api/user';
+import IngredientModal from './components/burgerIngredients/ingridientModal/ingredientModal';
 
 export const App = () => {
   const location = useLocation();
   const background = location.state && location.state.background;
-  const { isIngredientModalOpen, setIsIngredientModalOpen } = useIngredients();
   const isResetPassword = TokenManager.getIsResetPassword();
 
   const { data: ingredientsData, isLoading, isError } = useGetIngridientsQuery()
@@ -76,13 +73,7 @@ export const App = () => {
       {isResetPassword && <Navigate to="/reset-password" replace={true} />}
       {background && <Routes>
         <Route path='/ingredients/:id' element={
-          <Modal 
-              title='Детали ингредиента'
-              isOpen={isIngredientModalOpen}
-              onClose={() => setIsIngredientModalOpen(false)}
-          >
-            <IngridientDetails />
-          </Modal>
+          <IngredientModal />
         } />
       </Routes>}
     </>

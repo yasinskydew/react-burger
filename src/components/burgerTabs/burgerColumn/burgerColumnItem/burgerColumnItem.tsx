@@ -3,7 +3,6 @@ import { Counter } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './burgerColumnItem.module.css'
 import { IIngredient, DragItemTypes } from '../../../../services/types';
 import { useOrder } from '../../../../services/store/hooks/useOrder';
-import { useIngredients } from '../../../../services/store/hooks';
 import { useDrag } from 'react-dnd';
 import { useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
@@ -14,7 +13,6 @@ export default function BurgerColumnItem({ ...ingredient }: BurgerColumnItemProp
     const { items, getBun } = useOrder();
     const dragRef = useRef<HTMLAnchorElement>(null);
     const location = useLocation();
-    const { setIsIngredientModalOpen } = useIngredients();
     
     const [{isDrag}, drag] = useDrag({
         type: DragItemTypes.INGREDIENT,
@@ -41,7 +39,6 @@ export default function BurgerColumnItem({ ...ingredient }: BurgerColumnItemProp
             ref={dragRef} 
             style={{ opacity: isDrag ? 0.4 : 1 }}
             state={{ background: location }}
-            onClick={() => setIsIngredientModalOpen(true)}
         >
             <img src={ingredient.image} alt={ingredient.name} />
             {getCount() > 0 && <Counter count={getCount()} size="default" />}
