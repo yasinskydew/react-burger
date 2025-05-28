@@ -17,10 +17,12 @@ import { useEffect } from 'react';
 import IngridientDetails from './components/burgerIngredients/ingridientDetails/ingridientDetails';
 import { useIngredients } from './services/store/hooks';
 import { Loader } from './components/loader/loader';
-import { IIngredient } from './services/types';
 import { useGetIngridientsQuery } from './services/api/ingridient';
 import IngridientDetailsPage from './pages/ingridientDetails/ingredientDetailsPage';
 import { TokenManager } from './services/utils/tokenManager';
+import { useSelector } from 'react-redux';
+import { ApplicationState } from './services/store/store';
+import { useGetUserQuery } from './services/api/user';
 
 export const App = () => {
   const location = useLocation();
@@ -29,20 +31,20 @@ export const App = () => {
   const isResetPassword = TokenManager.getIsResetPassword();
 
   const { data: ingredientsData, isLoading, isError } = useGetIngridientsQuery()
-  const { setDefaultBun } = useIngredients();
+  const { user } = useSelector((state: ApplicationState) => state.userSliceReducer);
+  const { isLoading: isUserLoading, isError: isUserError } = useGetUserQuery(undefined, {
+    skip: !TokenManager.getAccessToken() || !!user
+  });
 
   useEffect(() => {
-    if(isLoading) {
+    if(isLoading || isUserLoading) {
         return;
     }
-    if(isError) {
+    if(isError || isUserError) {
         return;
-    }
-    if (ingredientsData && ingredientsData.success) {
-        setDefaultBun(ingredientsData.data.find(ingredient => ingredient.type === 'bun') as IIngredient);
     }
       
-  }, [ingredientsData, setDefaultBun, isLoading, isError]);
+  }, [ingredientsData, isLoading, isError, isUserLoading, isUserError]);
 
   
   if (isLoading) {

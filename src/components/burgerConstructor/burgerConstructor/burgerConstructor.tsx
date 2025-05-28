@@ -8,17 +8,18 @@ import BurgerComponentList from '../burgerComponentList/burgerComponentList';
 import BurgerPrice from '../../burgerPrice/burgerPrice';
 import BurgerComponent from '../burgerComponent/burgerComponent';
 import { useDrop } from 'react-dnd';
-import { DragItemTypes, IIngredient } from '../../../services/types';
-import { addIngridient } from '../../../services/reducers/order';
+import { BurgerComponentType, DragItemTypes, IIngredient } from '../../../services/types';
+import { addIngridient, setBun } from '../../../services/reducers/order';
 import { useDispatch, useSelector } from 'react-redux';
 import { Loader } from '../../loader/loader';
 import { ApplicationState } from '../../../services/store/store';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { defaultIngridient } from '../../../services/store/hooks';
 
 export default function BurgerConstructor() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { items, totalPrice, createOrder } = useOrder();
+  const { items, totalPrice, createOrder, clearOrder } = useOrder();
   const { user } = useSelector((state: ApplicationState) => state.userSliceReducer);
   const navigate = useNavigate();
   const location = useLocation();
@@ -31,12 +32,13 @@ export default function BurgerConstructor() {
     }
     setIsLoading(true);
     await createOrder();
+    clearOrder();
     setIsModalOpen(true)
     setIsLoading(false);
   };
   
   const handleCloseModal = () => setIsModalOpen(false);
-  const { getBun, setDefaultBun } = useOrder();
+  const { getBun } = useOrder();
   const bun = getBun();
 
   const dropRef = useRef<HTMLDivElement>(null);
@@ -47,11 +49,13 @@ export default function BurgerConstructor() {
         return;
       }
 
+      if(item.ingredient.type === 'bun') {
+        return dispatch(setBun(item.ingredient));
+      }
+
       if(item.ingredient.type !== 'bun') {
         return dispatch(addIngridient(item.ingredient));
       }
-     
-      return setDefaultBun(item.ingredient);
     },
   });
   drop(dropRef);
@@ -62,15 +66,19 @@ export default function BurgerConstructor() {
   return (
     <section className={styles.burgerConstructor}>
       <div className={styles.burgerConstructorContent} ref={dropRef}>
-        <BurgerComponent {...bun} isLocked={true} index={0} />
+        <BurgerComponent {...bun} name={bun.name + ' (верх)'} isLocked={true} index={0} positionType={BurgerComponentType.top}/>
         {
-          Object.keys(items).length > 0 && (
+          Object.keys(items).length > 0 ? (
             <div className={styles.scrollableContent}>
               <BurgerComponentList />
             </div>
+          ) : (
+            <div className={styles.scrollableContent}>
+              <BurgerComponent {...defaultIngridient} name={defaultIngridient.name} isLocked={true} index={0} />
+            </div>
           )
         }
-        <BurgerComponent {...bun} isLocked={true} index={0} />
+        <BurgerComponent {...bun} name={bun.name + ' (низ)'} isLocked={true} index={0} positionType={BurgerComponentType.bottom}/>
       </div>
       <div className={styles.burgerConstructorBottoms}>
         <BurgerPrice size="large" price={totalPrice} />

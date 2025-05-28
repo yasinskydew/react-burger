@@ -39,6 +39,7 @@ const orderSlice = createSlice({
 
         clearOrderIngridients: (state) => {
             state.items = [];
+            state.bun = null;
             state.totalPrice = 0;
         },
         setBun: (state, action: PayloadAction<IIngredient>) => {
