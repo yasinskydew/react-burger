@@ -1,0 +1,18 @@
+.header_button {
+    align-items: center;
+    display: flex;
+    gap: 8px;
+    padding: 16px 20px;
+}
+
+.header_navigation_link {
+    text-decoration: none;
+}
+
+.header_button_text {
+    color: white;
+}
+
+.header_button_text_secondary {
+    color: var(--text-inactive-color);
+}

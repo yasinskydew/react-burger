@@ -5,14 +5,14 @@ import { IIngredient, DragItemTypes } from '../../../../services/types';
 import { useOrder } from '../../../../services/store/hooks/useOrder';
 import { useDrag } from 'react-dnd';
 import { useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
-export interface BurgerColumnItemProps extends IIngredient {
-    onClick: () => void
-}
+export interface BurgerColumnItemProps extends IIngredient {}
 
-export default function BurgerColumnItem({ onClick, ...ingredient }: BurgerColumnItemProps) {
+export default function BurgerColumnItem({ ...ingredient }: BurgerColumnItemProps) {
     const { items, getBun } = useOrder();
-    const dragRef = useRef<HTMLDivElement>(null);
+    const dragRef = useRef<HTMLAnchorElement>(null);
+    const location = useLocation();
     
     const [{isDrag}, drag] = useDrag({
         type: DragItemTypes.INGREDIENT,
@@ -34,11 +34,16 @@ export default function BurgerColumnItem({ onClick, ...ingredient }: BurgerColum
     }
 
     return (
-        <div className={styles.burger_column_item} onClick={onClick} ref={dragRef} style={{ opacity: isDrag ? 0.4 : 1 }}>
+        <Link to={`/ingredients/${ingredient._id}`} 
+            className={styles.burger_column_item} 
+            ref={dragRef} 
+            style={{ opacity: isDrag ? 0.4 : 1 }}
+            state={{ background: location }}
+        >
             <img src={ingredient.image} alt={ingredient.name} />
             {getCount() > 0 && <Counter count={getCount()} size="default" />}
             <BurgerPrice size="default" price={ingredient.price} />
             <h2 className={styles.title + ' text_type_main-default'}>{ingredient.name}</h2>
-        </div>
+        </Link>
     )
 }

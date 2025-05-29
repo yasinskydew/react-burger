@@ -1,18 +1,23 @@
+import { useParams } from "react-router-dom";
 import IngridientNutritionList from "../ingridientNutrition/ingridientNutritionList";
 import styles from './ingridientDetails.module.css';
-import { useSelector } from "react-redux";
-import { ApplicationState } from "../../../services/store/store";
-
+import { useIngredients } from "../../../services/store/hooks";
+import { NotFoundPage } from "../../../pages/notFound/notFoundPage";
 
 export default function IngridientDetails() {
-    const ingridient = useSelector((state: ApplicationState) => state.currentIngredient.currentIngredient);
-    if (!ingridient) return null;
+  const { id } = useParams();
+  
+  const { getIngredientById } = useIngredients();
+  const ingredient = getIngredientById(id as string);
 
-    return (
-        <article className={styles.ingridientDetails}>
-          <img className={styles.ingridientDetailsImage} src={ingridient.image_large} alt={ingridient.name} />
-          <p className={styles.ingridientDetailsName + ' text_type_main-medium'}>{ingridient.name}</p>
-          <IngridientNutritionList ingridient={ingridient} />
-        </article>
-    )
+  if(!ingredient) {
+    return <NotFoundPage />
+  }
+  return (
+      <article className={styles.ingridientDetails}>
+        <img className={styles.ingridientDetailsImage} src={ingredient.image_large} alt={ingredient.name} />
+        <p className={styles.ingridientDetailsName + ' text_type_main-medium'}>{ingredient.name}</p>
+        <IngridientNutritionList ingridient={ingredient} />
+      </article>
+  )
 }

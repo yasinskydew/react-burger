@@ -1,0 +1,18 @@
+.profile_menu {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.profile_menu_nav_link {
+    text-decoration: none;
+}
+
+.profile_menu_item {
+    color: var(--text-inactive-color);
+    cursor: pointer;
+}
+
+.profile_menu_item_active {
+    color: var(--text-primary-color);
+}

@@ -1,5 +1,6 @@
 import { IOrderResponse } from "../types";
 import { IOrder } from "../types";
+import { TokenManager } from "../utils/tokenManager";
 import { ApiEndpoints } from "./constants/api";
 import { ApiGroupNames } from "./constants/api-group-names";
 import { EndpointNames } from "./constants/endpoint-names";
@@ -15,6 +16,9 @@ export const orderApiSlice = apiSlice.injectEndpoints({
                 apiGroupName: ApiGroupNames.ORDERS,
                 name: EndpointNames.CREATE_ORDER,
                 body: order,  
+                headers: {
+                    Authorization: `Bearer ${TokenManager.getAccessToken()}`,
+                },
             }),
         }),
     }),

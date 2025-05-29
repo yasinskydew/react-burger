@@ -2,8 +2,9 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { IIngredient, IOrderPosition, IOrderResponse } from "../../types";
 import { ApplicationState } from "../store";
-import { setOrder, setBun, changePosition } from "../../reducers/order";
+import { setOrder, changePosition, clearOrderIngridients } from "../../reducers/order";
 import { useCreateOrderMutation } from "../../api/order";
+import { defaultBun } from "./useIngredients";
 
 interface UseOrderReturn {
     items: IOrderPosition[];
@@ -11,7 +12,7 @@ interface UseOrderReturn {
     getBun: () => IIngredient;
     createOrder: () => Promise<void>;
     order: IOrderResponse | null;
-    setDefaultBun: (ingredient: IIngredient) => void;
+    clearOrder: () => void;
     changePosition: (dragIndex: number, hoverIndex: number) => void;
 }
 
@@ -35,16 +36,16 @@ export const useOrder = (): UseOrderReturn => {
     }
   }
 
-  const setDefaultBun = (ingredient: IIngredient) => {
-    dispatch(setBun(ingredient));
-  }
-
   const handleChangePosition = (dragIndex: number, hoverIndex: number) => {
     dispatch(changePosition({ dragIndex, hoverIndex }));
   }
 
-  const getBun = () => {
-    return bun as IIngredient;
+  const clearOrder = () => {
+    dispatch(clearOrderIngridients());
+  }
+
+  const getBun = (): IIngredient => {
+    return bun || defaultBun;
   }
 
   return { 
@@ -53,7 +54,7 @@ export const useOrder = (): UseOrderReturn => {
     order,
     getBun, 
     createOrder, 
-    setDefaultBun,
+    clearOrder,
     changePosition: handleChangePosition 
   };
 }

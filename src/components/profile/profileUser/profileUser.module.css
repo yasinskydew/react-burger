@@ -1,0 +1,19 @@
+.profile_user {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 480px;
+    align-items: flex-end;
+}
+
+.profile_user_inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.profile_user_buttons {
+    display: flex;
+    gap: 20px;
+}
+
