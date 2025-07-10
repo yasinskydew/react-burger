@@ -6,7 +6,6 @@ import { ForgotPasswordPage } from './pages/forgotPassword/forgotPasswordPage';
 import { ProfilePage } from './pages/profile/profilePage';
 import { NotFoundPage } from './pages/notFound/notFoundPage';
 import { ProtectedRoute } from './components/protectedRoute/protectedRoute';
-import { OrderHistoryPage } from './pages/orderHistory/orderHistoryPage';
 import { ConfirmationPage } from './pages/confirmation/confirmationPage';
 import { ProfileLayout } from './components/layouts/profileLayout/profileLayout';
 import { RegisterPage } from './pages/register/registerPage';
@@ -21,6 +20,7 @@ import { useSelector } from 'react-redux';
 import { ApplicationState } from './services/store/store';
 import { useGetUserQuery } from './services/api/user';
 import IngredientModal from './components/burgerIngredients/ingridientModal/ingredientModal';
+import { FeedPage } from './pages/feed/feed';
 
 export const App = () => {
   const location = useLocation();
@@ -53,6 +53,7 @@ export const App = () => {
       <Routes location={background || location}>
         <Route element={<PageLayout />}>   
           <Route path='/' element={<HomePage />} />
+          <Route path='/feed' element={<FeedPage />} />
           <Route path='/ingredients/:id' element={<IngridientDetailsPage />} />
           <Route element={<UnauthRoute />}>
               <Route path='/login' element={<LoginPage />} />
@@ -61,7 +62,6 @@ export const App = () => {
               <Route path='/reset-password' element={<ConfirmationPage />} />
           </Route>
           <Route element={<ProtectedRoute />}>
-            <Route path='/order-history' element={<OrderHistoryPage />} />
             <Route element={<ProfileLayout />}>
               <Route path='/profile' element={<ProfilePage />} />
               <Route path='/profile/orders' element={<ProfileOrdersPage />} />
