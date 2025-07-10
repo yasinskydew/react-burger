@@ -11,3 +11,13 @@
 .feedDashboardStatusListPending {
   color: white;
 }
+
+.feedDashboardStatusListCreated {
+  color: goldenrod;
+}
+
+
+.feedDashboardColumnList {
+  display: flex;
+  gap: 8px;
+}

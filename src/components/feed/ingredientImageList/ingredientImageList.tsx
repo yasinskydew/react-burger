@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './ingredientImageList.module.css';
+import { IngredientImageCircle } from './ingredientImageCircle';
 
 interface Ingredient {
   _id: string;
@@ -19,16 +20,12 @@ export const IngredientImageList: React.FC<Props> = ({ ingredients, maxVisible =
   return (
     <div className={styles.list}>
       {visibleIngredients.map((ingredient, idx) => (
-        <div className={styles.circle} key={ingredient._id || idx}>
-          <div className={styles.innerCircle}>
-            <img src={ingredient.image} alt={ingredient.name} className={styles.image} />
-            {idx === maxVisible - 1 && extraCount > 0 && (
-              <div className={styles.overlay}>
-                <span className='text text_type_main-default'>+{extraCount}</span>
-              </div>
-            )}
-          </div>
-        </div>
+        <IngredientImageCircle
+          key={idx}
+          ingredient={ingredient}
+          showOverlay={idx === maxVisible - 1 && extraCount > 0}
+          extraCount={extraCount}
+        />
       ))}
     </div>
   );

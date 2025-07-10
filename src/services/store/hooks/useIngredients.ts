@@ -10,6 +10,7 @@ interface UseIngredientsReturn {
   getIngredientById: (id: string) => IIngredient | undefined;
   isIngredientModalOpen: boolean;
   setIsIngredientModalOpen: (isOpen: boolean) => void;
+  getIngredientListByIds: (ingredientIds: string[]) => IIngredient[]
 }
 
 export const defaultBun: IIngredient = {
@@ -54,12 +55,19 @@ export const useIngredients = (): UseIngredientsReturn => {
   const setIsIngredientModalOpen = (isOpen: boolean) => {
     dispatch(setIsIngredientModalOpenReducer(isOpen));
   }
+
+  const getIngredientListByIds = (ingredientIds: string[]): IIngredient[] => {
+    return ingredientIds
+      .map((id: string) => getIngredientById(id))
+      .filter((ingredient): ingredient is IIngredient => Boolean(ingredient));
+  }
   
   return { 
     ingredients, 
     isIngredientModalOpen, 
     getIngridientsByType, 
     getIngredientById, 
-    setIsIngredientModalOpen 
+    setIsIngredientModalOpen,
+    getIngredientListByIds
   };
 }

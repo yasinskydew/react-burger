@@ -66,3 +66,41 @@ const tabs: ITab[] = [
 export const getTabs = () => {
   return tabs;
 }
+
+export enum OrdersStatusEnum {
+  done = 'done',
+  created = 'created',
+  pending = 'pending'
+}
+
+export const OrdersStatusTranslates =  {
+  [OrdersStatusEnum.done]: 'Выполнен',
+  [OrdersStatusEnum.pending]: 'Готовится',
+  [OrdersStatusEnum.created]: 'Создан'
+}
+
+export interface IOrders {
+  _id: string
+  name: string
+  createdAt: string
+  updatedAt: string
+  number: number,
+  ingredients: string[]
+  status: OrdersStatusEnum
+}
+
+export interface IOrdersFull extends IOrders {
+  owner: string
+}
+
+export interface IOrdersResponse {
+  total: number;
+  totalToday: number;
+  orders: IOrders[];
+  success: boolean;
+}
+
+export interface IOrdersByIdResponse {
+  success: boolean;
+  orders: IOrdersFull[];
+}

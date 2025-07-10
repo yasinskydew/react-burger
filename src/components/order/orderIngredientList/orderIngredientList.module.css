@@ -1,0 +1,17 @@
+.listContainer {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 40px;
+  margin-right: 24px;
+}
+
+.ingredientItem {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+}

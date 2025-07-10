@@ -1,4 +1,5 @@
-import { FeedDashboardOrderStatusEnum, FeedDashboardStatusList } from '../feedDashboadrStatusList/feedDashboadrStatusList'
+import { OrdersStatusEnum } from '../../../services/types'
+import { FeedDashboardStatusList } from '../feedDashboadrStatusList/feedDashboadrStatusList'
 import styles from './feedDashboardStatus.module.css'
 
 interface FeedDashboardStatusProps {
@@ -12,12 +13,12 @@ export const FeedDashboardStatus = (props: FeedDashboardStatusProps) => {
       <FeedDashboardStatusList 
         title='Готовы:'
         orderList={props.doneList}
-        orderStatus={FeedDashboardOrderStatusEnum.done}
+        orderStatus={OrdersStatusEnum.done}
       />
       <FeedDashboardStatusList 
         title='В работе:'
         orderList={props.pendingList}
-        orderStatus={FeedDashboardOrderStatusEnum.pending}
+        orderStatus={OrdersStatusEnum.pending}
       />
     </article>
   )

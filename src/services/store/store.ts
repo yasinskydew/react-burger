@@ -5,6 +5,7 @@ import ingredientsReducer from '../reducers/ingredients'
 import tabsReducer from '../reducers/tabs'
 import orderReducer from '../reducers/order'
 import userReducer from '../reducers/user'
+import ordersReducer from '../reducers/orders'
 
 const rootReducer = combineReducers({
   [apiSlice.reducerPath]: apiSlice.reducer,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   ingredients: ingredientsReducer,
   order: orderReducer,
   userSliceReducer: userReducer,
+  orders: ordersReducer,
 })
 
 export type ApplicationState = ReturnType<typeof rootReducer>;

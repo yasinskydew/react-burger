@@ -8,4 +8,6 @@ export enum EndpointNames {
     AUTH_UPDATE_USER = 'updateUser',
     AUTH_RESET_PASSWORD = 'resetPassword',
     AUTH_RESET_PASSWORD_CONFIRM = 'resetPasswordConfirm',
+    GET_ALL_ORDERS = 'getAllOrders',
+    GET_BY_ID_ORDERS = 'getByIdOrders'
 }

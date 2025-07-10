@@ -1,0 +1,34 @@
+.orderContent {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+}
+.orderContentTotal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.orderContentStatusListDone {
+  margin-bottom: 60px;
+  color: #00CCCC;
+}
+
+.orderContentStatusListPending {
+  margin-bottom: 60px;
+  color: white;
+}
+
+.orderContentStatusListCreated {
+  margin-bottom: 60px;
+  color: goldenrod;
+}
+
+.orderContentName {
+  margin-bottom: 12px;
+}
+
+.orderContetIngredienTitle {
+  margin-bottom: 24px;
+}
