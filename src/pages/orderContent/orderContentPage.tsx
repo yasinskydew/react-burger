@@ -3,6 +3,7 @@ import { useOrders } from "../../services/store/hooks";
 import { OrderContent } from "../../components/order/orderContent/orderContent";
 import { useEffect } from "react";
 import { useGetAllOrdersQuery } from "../../services/api/orders";
+import styles from './orderContentPage.module.css'
 
 export const OrderContentPage = () => {
   const { data, isLoading, isError } = useGetAllOrdersQuery()
@@ -16,7 +17,7 @@ export const OrderContentPage = () => {
 
   const order = getOrderByNumber(orderNumber as string);
   return (
-     <div className="orderContentPage">
+     <div className={styles.orderContentPage}>
        <OrderContent order={order} />
      </div>
   )

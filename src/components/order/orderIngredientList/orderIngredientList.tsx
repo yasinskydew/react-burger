@@ -8,7 +8,7 @@ export const OrderIngredientList = ({ ingredients} : { ingredients: IIngredient[
   const grouppedIngredients = groupByKey(ingredients, '_id');
 
   return (
-    <ul className={styles.listContainer}>
+    <ul className={[styles.listContainer, styles.scrollableContent].join(' ')}>
       {
         Object.keys(grouppedIngredients).map((key, idx) => {
 

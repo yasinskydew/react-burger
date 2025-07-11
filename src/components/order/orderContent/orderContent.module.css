@@ -32,3 +32,8 @@
 .orderContetIngredienTitle {
   margin-bottom: 24px;
 }
+
+
+.orderContentPageTitle {
+  align-self: flex-start;
+}
