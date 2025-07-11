@@ -5,37 +5,50 @@ import { useIngredients, useOrders } from '../../../services/store/hooks';
 import { Link, useLocation } from 'react-router-dom';
 import { IOrders } from '../../../services/types';
 import { OrderTotalPrice } from '../../order/orderTotalPrice/orderTotalPrice';
+import { useMemo } from 'react';
 
 interface FeedListItemProp {
-  order: IOrders
-  linkPath: string
+  order: IOrders;
+  linkPath: string;
 }
-export const FeedListItem = (props: FeedListItemProp) => {
+
+export const FeedListItem = ({ order, linkPath }: FeedListItemProp) => {
   const location = useLocation();
   const { getIngredientListByIds } = useIngredients();
-  const { getTotlByIngredients } = useOrders()
+  const { getTotalByIngredients } = useOrders();
 
-  const { order } = props;
-  const ingredients = getIngredientListByIds(order.ingredients)
+  const ingredients = useMemo(
+    () => getIngredientListByIds(order.ingredients),
+    [order.ingredients, getIngredientListByIds]
+  );
 
+  const totalPrice = useMemo(
+    () => getTotalByIngredients(ingredients),
+    [ingredients, getTotalByIngredients]
+  );
 
   return (
-    <li key={order.number} >
-      <Link to={props.linkPath} 
-        className={styles.feedListItem} 
+    <li>
+      <Link
+        to={linkPath}
+        className={styles.feedListItem}
         state={{ background: location }}
       >
         <div className={styles.feedListItemRow}>
-          <span className='text text_type_digits-default'>{'#' + order.number}</span>
-          <span className='text text_type_main-default text_color_inactive'>{<FormattedDate date={new Date(order.createdAt)} />}</span>
+          <span className="text text_type_digits-default">
+            {'#' + order.number}
+          </span>
+          <span className="text text_type_main-default text_color_inactive">
+            <FormattedDate date={new Date(order.createdAt)} />
+          </span>
         </div>
 
-        <h2 className='text text_type_main-medium'>{order.name}</h2>
+        <h2 className="text text_type_main-medium">{order.name}</h2>
         <div className={styles.feedListItemRow}>
-          <IngredientImageList ingredients={ingredients} maxVisible={5}/>
-          <OrderTotalPrice totalPrice={getTotlByIngredients(ingredients)} />
+          <IngredientImageList ingredients={ingredients} maxVisible={5} />
+          <OrderTotalPrice totalPrice={totalPrice} />
         </div>
       </Link>
     </li>
-  )
-}
+  );
+};

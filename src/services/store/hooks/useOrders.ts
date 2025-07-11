@@ -7,7 +7,7 @@ export const useOrders = () => {
   const dispatch = useDispatch();
 
   const isOrderModalOpen = useSelector((state: ApplicationState) => state.orders.isOrderModalOpen);
-  const orders = useSelector((state: ApplicationState) => state.orders.items);
+  const orders = useSelector((state: ApplicationState) => state.orders.orders);
 
   const setIsOrderModalOpen = (isOpen: boolean) => {
     dispatch(setIsOrderModalOpenReducer(isOpen));
@@ -15,7 +15,7 @@ export const useOrders = () => {
 
   const getOrderByNumber = (orderNumber: string) => orders.find(({ number }) => orderNumber === String(number));
 
-  const getTotlByIngredients = (ingredients: IIngredient[]): string => {
+  const getTotalByIngredients = (ingredients: IIngredient[]): string => {
     return String(ingredients.reduce((sum: number, item: IIngredient) => sum + item.price, 0));
   }
 
@@ -23,6 +23,6 @@ export const useOrders = () => {
     isOrderModalOpen,
     setIsOrderModalOpen,
     getOrderByNumber,
-    getTotlByIngredients,
+    getTotalByIngredients,
   }
 }

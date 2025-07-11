@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { FeedList } from "../../components/feed/feedList/feedList"
-import { useGetAllOrdersQuery } from "../../services/api/orders";
 import { Loader } from "../../components/loader/loader";
+import { useWsUserOrdersQuery } from "../../services/api/wsOrders";
 
 export const ProfileOrdersPage = () => {
-    const { data, isLoading, isError } = useGetAllOrdersQuery()
+    const { data, isError, isLoading } = useWsUserOrdersQuery();
+
 
     useEffect(() => {
       if(isLoading) {

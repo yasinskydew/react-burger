@@ -13,7 +13,7 @@ interface OrderContentProps {
 export const OrderContent = (props: OrderContentProps) => {
   const location = useLocation();
   const { getIngredientListByIds } = useIngredients();
-  const { getTotlByIngredients } = useOrders();
+  const { getTotalByIngredients } = useOrders();
 
   if (!props.order) {
     return (
@@ -35,7 +35,6 @@ export const OrderContent = (props: OrderContentProps) => {
   const ingredients = getIngredientListByIds(ingredientIds);
 
   const isModal = location.state;
-  console.log(isModal, 'isModal')
 
   return (
     <section className={styles.orderContent}>
@@ -52,7 +51,7 @@ export const OrderContent = (props: OrderContentProps) => {
         <OrderIngredientList ingredients={ingredients}/>
         <div className={styles.orderContentTotal}>
           <CreatedOrderDate>{createdAt}</CreatedOrderDate>
-          <OrderTotalPrice totalPrice={getTotlByIngredients(ingredients)}/>
+          <OrderTotalPrice totalPrice={getTotalByIngredients(ingredients)}/>
         </div>
     </section>
   )

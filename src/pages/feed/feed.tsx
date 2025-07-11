@@ -1,35 +1,22 @@
-import { useEffect } from 'react';
 import { FeedDashboard } from '../../components/feed/feedDashboard/feedDashboard';
 import { FeedList } from '../../components/feed/feedList/feedList';
 import styles from './feed.module.css';
-import { useGetAllOrdersQuery } from '../../services/api/orders';
 import { Loader } from '../../components/loader/loader';
+import { useWsOrdersQuery } from '../../services/api/wsOrders';
+import { NotFoundPage } from '../notFound/notFoundPage';
 
 export const FeedPage = () => {
-
+  const { data, isError, isLoading } = useWsOrdersQuery();
   const titleText = 'Лента заказов';
-  const { data, isLoading, isError } = useGetAllOrdersQuery()
-
-  useEffect(() => {
-    if(isLoading) {
-        return;
-    }
-    
-    if(isError) {
-        return;
-    }
-      
-  }, [data, isLoading, isError]);
-
   
-  if (isLoading) {
-      return <Loader />
-  }
+ 
 
-  if(!data?.orders) {
-    return (
-      <div>Error</div>
-    )
+  if (isError || !data) {
+    return <NotFoundPage />
+  }
+  
+  if (isLoading || !data.total) {
+    return <Loader />
   }
   
   return (
@@ -39,7 +26,7 @@ export const FeedPage = () => {
       </h1>
       <div className={styles.feedPageContainer}>
         <FeedList orders={data.orders} linkUrl='feed' />
-        <FeedDashboard data={data}/>
+        <FeedDashboard orders={data.orders} total={data.total} totalToday={data.totalToday}/>
       </div>
     </div>
   )
