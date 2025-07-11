@@ -48,14 +48,12 @@ const ordersSlice = createSlice({
       state.orders = action.payload.orders;
     })
     
-    // HTTP запросы
     builder
       .addMatcher(
         ordersApiSlice.endpoints.getAllOrders.matchPending,
         (state) => {
           state.loading = true;
           state.error = null;
-          // Не очищаем items, чтобы не пропадали данные при загрузке
         }
       )
       .addMatcher(

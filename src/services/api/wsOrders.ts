@@ -1,4 +1,3 @@
-// api/websocket-api-slice.ts
 import { IOrdersResponse } from '../types';
 import { BASE_WS_URL } from './constants/api';
 import { apiSlice } from './create-api';

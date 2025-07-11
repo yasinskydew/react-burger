@@ -1,6 +1,5 @@
 export const getChunks = (array: any[], size: number) => {
   const chunks = [];
-  // Check if size is a valid positive integer
   if (!Array.isArray(array) || typeof size !== 'number' || size <= 0) {
     return array;
   }
