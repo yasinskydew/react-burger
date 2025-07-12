@@ -1,5 +1,5 @@
-import { IIngredient, IOrderPosition, IOrderResponse } from "../../types";
-import { setOrder, changePosition, clearOrderIngridients } from "../../reducers/order";
+import { IIngredient, IngredientType, IOrderPosition, IOrderResponse } from "../../types";
+import { setOrder, changePosition, clearOrderIngridients, setBun, addIngridient } from "../../reducers/order";
 import { useCreateOrderMutation } from "../../api/order";
 import { defaultBun } from "./useIngredients";
 import { useAppDispatch, useAppSelector } from "../hook";
@@ -12,6 +12,7 @@ interface UseOrderReturn {
     order: IOrderResponse | null;
     clearOrder: () => void;
     changePosition: (dragIndex: number, hoverIndex: number) => void;
+    addToOrder: (ingredient: IIngredient) => void
 }
 
 export const useOrder = (): UseOrderReturn => {
@@ -46,6 +47,24 @@ export const useOrder = (): UseOrderReturn => {
     return bun || defaultBun;
   }
 
+  const addToOrder = (ingredient: IIngredient) => {
+    switch (ingredient.type) {
+      case IngredientType.bun: {
+        dispatch(setBun(ingredient));
+        break;
+      }
+      case IngredientType.sauce:
+      case IngredientType.main: {
+         dispatch(addIngridient(ingredient));
+         break;
+      }
+
+      default: {
+        console.log('Undefined ingredient type');
+      }
+    }
+  }
+
   return { 
     items, 
     totalPrice, 
@@ -53,6 +72,7 @@ export const useOrder = (): UseOrderReturn => {
     getBun, 
     createOrder, 
     clearOrder,
-    changePosition: handleChangePosition 
+    changePosition: handleChangePosition,
+    addToOrder,
   };
 }

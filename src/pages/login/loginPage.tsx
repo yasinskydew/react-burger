@@ -5,13 +5,13 @@ import { ModalWrapper } from "../../components/modalWrapper/modalWrapper";
 import { useLoginMutation } from "../../services/api/auth";
 import { Navigate, useLocation, useNavigate } from "react-router";
 import { Loader } from "../../components/loader/loader";
-import { useAppSelector } from "../../services/store/hook";
+import { useUser } from "../../services/store/hooks/useUser";
 
 export const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const { user, error } = useAppSelector((state) => state.userSliceReducer);
     const [login, { isLoading, isError }] = useLoginMutation();
+    const { user, error } = useUser();
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";

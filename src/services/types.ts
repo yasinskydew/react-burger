@@ -27,10 +27,16 @@ export interface IOrderResponse {
 }
 
 
+export enum IngredientType {
+  bun = 'bun',
+  sauce = 'sauce',
+  main = 'main',
+}
+
 export interface IIngredient {
  _id: string;
  name: string;
- type: string;
+ type: IngredientType;
  proteins: number;
  fat: number;
  carbohydrates: number;
@@ -50,15 +56,15 @@ export interface ITab {
 
 const tabs: ITab[] = [
   {
-     id: 'bun',
+     id: IngredientType.bun,
      title: 'Булки',
   },
   {
-     id: 'main',
+     id: IngredientType.main,
      title: 'Начинки',
   },
   {
-     id: 'sauce',
+     id: IngredientType.sauce,
      title: 'Соусы',
   }
 ]

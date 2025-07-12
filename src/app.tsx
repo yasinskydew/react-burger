@@ -21,15 +21,15 @@ import IngredientModal from './components/burgerIngredients/ingridientModal/ingr
 import { FeedPage } from './pages/feed/feed';
 import OrderModal from './components/order/orderModal/orderModal';
 import { OrderContentPage } from './pages/orderContent/orderContentPage';
-import { useAppSelector } from './services/store/hook';
+  import { useUser } from './services/store/hooks/useUser';
 
-export const App = () => {
+  export const App = () => {
   const location = useLocation();
   const background = location.state && location.state.background;
   const isResetPassword = TokenManager.getIsResetPassword();
 
   const { data: ingredientsData, isLoading, isError } = useGetIngridientsQuery()
-  const { user } = useAppSelector((state) => state.userSliceReducer);
+  const { user } = useUser();
   const { isLoading: isUserLoading, isError: isUserError } = useGetUserQuery(undefined, {
     skip: !TokenManager.getAccessToken() || !!user
   });

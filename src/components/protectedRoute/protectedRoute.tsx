@@ -4,12 +4,12 @@ import { TokenManager } from '../../services/utils/tokenManager';
 import { Loader } from "../loader/loader";
 import { useGetUserQuery } from "../../services/api/user";
 import { refreshToken } from "../../services/utils/api";
-import { useAppSelector } from "../../services/store/hook";
+import { useUser } from "../../services/store/hooks/useUser";
 
 export const ProtectedRoute = () => {
   const location = useLocation();
   const token = TokenManager.getAccessToken();
-  const { user } = useAppSelector((state) => state.userSliceReducer);
+  const { user } = useUser(); 
   const { isLoading, isError } = useGetUserQuery(undefined, {
     skip: !token || !!user
   });

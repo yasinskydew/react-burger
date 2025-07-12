@@ -1,4 +1,4 @@
-import { IIngredient } from "../../types";
+import { IIngredient, IngredientType } from "../../types";
 import { setIsIngredientModalOpenReducer } from "../../reducers/ingredients";
 import circle from '../../../images/ingridients/circle.svg';
 import { useAppDispatch, useAppSelector } from "../hook";
@@ -15,7 +15,7 @@ interface UseIngredientsReturn {
 export const defaultBun: IIngredient = {
   _id: '0',
   name: 'Пожалуйста, перенесите сюда булку',
-  type: 'defaultBun',
+  type: IngredientType.bun,
   proteins: 0,
   fat: 0,
   carbohydrates: 0,
@@ -30,7 +30,7 @@ export const defaultBun: IIngredient = {
 export const defaultIngridient: IIngredient = {
   _id: '1',
   name: 'Пожалуйста, перенесите сюда ингридиент',
-  type: 'defaultIngridient',
+  type: IngredientType.main,
   proteins: 0,
   fat: 0,
   carbohydrates: 0,

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { IUserDataUpdate, useUpdateUserMutation } from '../../../services/api/user';
 import { Loader } from '../../loader/loader';
-import { useAppSelector } from '../../../services/store/hook';
+import { useUser } from '../../../services/store/hooks/useUser';
 
 export interface userPropertyInterface {
   placeholder: string;
@@ -20,8 +20,8 @@ export interface IUserData {
 }
 
 export const ProfileUser = () => {
-  const { user } = useAppSelector((state) => state.userSliceReducer);
   const [updateUser, { isLoading }] = useUpdateUserMutation();
+  const { user } = useUser();
 
   const [userData, setUserData] = useState<IUserData>({
     name: user?.name || '',

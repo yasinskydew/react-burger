@@ -3,8 +3,7 @@ import styles from './profileMenu.module.css';
 import { useLogoutMutation } from '../../../services/api/auth';
 import { TokenManager } from '../../../services/utils/tokenManager';
 import { Loader } from '../../loader/loader';
-import { setUser } from '../../../services/reducers/user';
-import { useAppDispatch, useAppSelector } from '../../../services/store/hook';
+import { useUser } from '../../../services/store/hooks/useUser';
 
 interface MenuItem {
   text: string;
@@ -14,12 +13,10 @@ interface MenuItem {
 
 export const ProfileMenu = () => {
   const [logout, { isLoading, isError }] = useLogoutMutation();
-  const { error } = useAppSelector((state) => state.userSliceReducer);
-  const dispatch = useAppDispatch();
-
+  const { error, clearUser } = useUser()
   const handleLogout = async () => {
     await logout({ token: TokenManager.getRefreshToken() || '' })
-    dispatch(setUser(null));
+    clearUser()
   }
 
   const menuItems: MenuItem[] = [

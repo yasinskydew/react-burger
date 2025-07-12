@@ -5,7 +5,7 @@ import { useRef, useState } from "react";
 import { useRegisterMutation } from "../../services/api/auth";
 import { Loader } from "../../components/loader/loader";
 import { useNavigate } from "react-router-dom";
-import { useAppSelector } from "../../services/store/hook";
+import { useUser } from "../../services/store/hooks/useUser";
 
 export const RegisterPage = () => {
   const [email, setEmail] = useState('');
@@ -15,7 +15,7 @@ export const RegisterPage = () => {
   const [nameError, setNameError] = useState(false);
 
   const [register, { isLoading, isError }] = useRegisterMutation();
-  const { error } = useAppSelector((state) => state.userSliceReducer);
+  const { error } = useUser()
   const navigate = useNavigate();
   
   const links = [
