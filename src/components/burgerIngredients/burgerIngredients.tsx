@@ -1,17 +1,16 @@
 import BurgerTabList from '../burgerTabs/burgerTabList/burgerTabList';
 import styles from './burgerIngredients.module.css';
 import { useEffect, useRef, useCallback } from 'react';
-import { ApplicationState } from '../../services/store/store';
-import { useSelector, useDispatch } from 'react-redux';
 import { selectActiveTab } from '../../services/reducers/tabs';
 import BurgerTitleSecond from '../burgerTabs/burgerTitleSecond/burgerTitleSecond';
 import BurgerColumnList from '../burgerTabs/burgerColumn/burgerColumnList/burgerColumnList';
 import { ITab } from '../../services/types';
+import { useAppDispatch, useAppSelector } from '../../services/store/hook';
 
 export default function BurgerIngredients() {
-    const tabs = useSelector((state: ApplicationState) => state.tabs.tabs);
-    const activeTab = useSelector((state: ApplicationState) => state.tabs.activeTab);
-    const dispatch = useDispatch();
+    const tabs = useAppSelector((state) => state.tabs.tabs);
+    const activeTab = useAppSelector((state) => state.tabs.activeTab);
+    const dispatch = useAppDispatch();
     const scrollableRef = useRef<HTMLDivElement>(null);
 
     const handleScroll = useCallback(() => {

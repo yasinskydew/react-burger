@@ -1,11 +1,10 @@
 import styles from './profileUser.module.css';
 import { ProfileUserInput } from '../profileUserInput/profileUserInput';
-import { ApplicationState } from '../../../services/store/store';
-import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { IUserDataUpdate, useUpdateUserMutation } from '../../../services/api/user';
 import { Loader } from '../../loader/loader';
+import { useUser } from '../../../services/store/hooks/useUser';
 
 export interface userPropertyInterface {
   placeholder: string;
@@ -21,8 +20,8 @@ export interface IUserData {
 }
 
 export const ProfileUser = () => {
-  const { user } = useSelector((state: ApplicationState) => state.userSliceReducer);
   const [updateUser, { isLoading }] = useUpdateUserMutation();
+  const { user } = useUser();
 
   const [userData, setUserData] = useState<IUserData>({
     name: user?.name || '',

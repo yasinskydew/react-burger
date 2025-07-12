@@ -2,8 +2,6 @@ import IngridientDetails from '../../components/burgerIngredients/ingridientDeta
 import styles from './ingredientDetailsPage.module.css';
 
 export default function IngridientDetailsPage() {
-  
-  
   return (
     <div className={styles.ingredientDetailsPage}>
       <h2 className={styles.ingredientDetailsPageTitle + ' text_type_main-medium'}>Детали ингредиента</h2>

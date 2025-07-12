@@ -1,5 +1,5 @@
 #  Git hub pages link
-[GitHub Pages Deployment](https://yasinskydew.github.io/react-burger/index.html)
+[GitHub Pages Deployment](https://yasinskydew.github.io/react-burger)
 
 
 # Getting Started with Create React App

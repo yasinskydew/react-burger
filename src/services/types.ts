@@ -27,10 +27,16 @@ export interface IOrderResponse {
 }
 
 
+export enum IngredientType {
+  bun = 'bun',
+  sauce = 'sauce',
+  main = 'main',
+}
+
 export interface IIngredient {
  _id: string;
  name: string;
- type: string;
+ type: IngredientType;
  proteins: number;
  fat: number;
  carbohydrates: number;
@@ -50,19 +56,57 @@ export interface ITab {
 
 const tabs: ITab[] = [
   {
-     id: 'bun',
+     id: IngredientType.bun,
      title: 'Булки',
   },
   {
-     id: 'main',
+     id: IngredientType.main,
      title: 'Начинки',
   },
   {
-     id: 'sauce',
+     id: IngredientType.sauce,
      title: 'Соусы',
   }
 ]
 
 export const getTabs = () => {
   return tabs;
+}
+
+export enum OrdersStatusEnum {
+  done = 'done',
+  created = 'created',
+  pending = 'pending'
+}
+
+export const OrdersStatusTranslates =  {
+  [OrdersStatusEnum.done]: 'Выполнен',
+  [OrdersStatusEnum.pending]: 'Готовится',
+  [OrdersStatusEnum.created]: 'Создан'
+}
+
+export interface IOrders {
+  _id: string
+  name: string
+  createdAt: string
+  updatedAt: string
+  number: number,
+  ingredients: string[]
+  status: OrdersStatusEnum
+}
+
+export interface IOrdersFull extends IOrders {
+  owner: string
+}
+
+export interface IOrdersResponse {
+  total: number;
+  totalToday: number;
+  orders: IOrders[];
+  success: boolean;
+}
+
+export interface IOrdersByIdResponse {
+  success: boolean;
+  orders: IOrdersFull[];
 }

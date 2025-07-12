@@ -9,22 +9,19 @@ import BurgerPrice from '../../burgerPrice/burgerPrice';
 import BurgerComponent from '../burgerComponent/burgerComponent';
 import { useDrop } from 'react-dnd';
 import { BurgerComponentType, DragItemTypes, IIngredient } from '../../../services/types';
-import { addIngridient, setBun } from '../../../services/reducers/order';
-import { useDispatch, useSelector } from 'react-redux';
 import { Loader } from '../../loader/loader';
-import { ApplicationState } from '../../../services/store/store';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { defaultIngridient } from '../../../services/store/hooks';
+import { useUser } from '../../../services/store/hooks/useUser';
 
 export default function BurgerConstructor() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { items, totalPrice, createOrder, clearOrder } = useOrder();
-  const { user } = useSelector((state: ApplicationState) => state.userSliceReducer);
+  const { items, totalPrice, createOrder, clearOrder, addToOrder } = useOrder();
+  const { user } = useUser();
+
   const navigate = useNavigate();
   const location = useLocation();
-
-  const dispatch = useDispatch();
 
   const handleOpenModal = async () => {
     if(!user) {
@@ -49,13 +46,7 @@ export default function BurgerConstructor() {
         return;
       }
 
-      if(item.ingredient.type === 'bun') {
-        return dispatch(setBun(item.ingredient));
-      }
-
-      if(item.ingredient.type !== 'bun') {
-        return dispatch(addIngridient(item.ingredient));
-      }
+      return addToOrder(item.ingredient);
     },
   });
   drop(dropRef);

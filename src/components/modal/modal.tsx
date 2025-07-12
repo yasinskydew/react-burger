@@ -10,11 +10,12 @@ interface ModalProps {
     children: React.ReactNode,
     title: string,
     onClose: () => void,
-    isOpen: boolean
+    isOpen: boolean,
+    extraTitleStyle?: string
 }
 
 export default function Modal(props: ModalProps) {
-    const { children, onClose, title, isOpen } = props;
+    const { children, onClose, title, isOpen, extraTitleStyle } = props;
 
     useEffect(() => {
         const handleEsc = (e: KeyboardEvent) => {
@@ -36,12 +37,14 @@ export default function Modal(props: ModalProps) {
 
     if (!isOpen) return null;
 
+    const titleStyle = styles.modal_title +  (extraTitleStyle ? ` ${extraTitleStyle}` :  ' text_type_main-large');
+
     return ReactDOM.createPortal(
         <>
             <ModalOverlay onClose={onClose} />
             <div className={styles.modal}>
                 <div className={styles.modal_header}>
-                    <h2 className={styles.modal_title + ' text_type_main-large'}>{title}</h2>
+                    <h2 className={titleStyle}>{title}</h2>
                     <button className={styles.modal_close} onClick={onClose}><img src={closeIcon} alt="close" /></button>
                 </div>
                 <div className={styles.modal_content}>

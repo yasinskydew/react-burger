@@ -1,11 +1,10 @@
 import { BurgerIcon, ListIcon, ProfileIcon, Logo } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './header.module.css'
 import HeaderNavButton from './headerNavButton/headerNavButton';
-import { useSelector } from 'react-redux';
-import { ApplicationState } from '../../services/store/store';
+import { useUser } from '../../services/store/hooks/useUser';
 
 export default function AppHeader() {
-    const { user } = useSelector((state: ApplicationState) => state.userSliceReducer);
+    const { user } = useUser();
     return (
         <header className={styles.header}>
             <div className={styles.container}>
@@ -18,7 +17,7 @@ export default function AppHeader() {
                     <HeaderNavButton 
                         Icon={ListIcon} 
                         text="Лента заказов" 
-                        path="/order-history" 
+                        path="/feed" 
                     />
                 </div>
                 <div className={styles.header_logo}>

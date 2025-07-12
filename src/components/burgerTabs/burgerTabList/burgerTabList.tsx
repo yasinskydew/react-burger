@@ -1,12 +1,11 @@
 import BurgerTabItem from '../burgetTabItem/burgerTabItem';
 import styles from './burgerTabList.module.css'
-import { useDispatch, useSelector } from 'react-redux';
-import { ApplicationState } from '../../../services/store/store';
 import { selectActiveTab } from '../../../services/reducers/tabs';
+import { useAppDispatch, useAppSelector } from '../../../services/store/hook';
 
 export default function BurgerTabList() {
-    const tabs = useSelector((state: ApplicationState) => state.tabs.tabs);
-    const dispatch = useDispatch();
+    const tabs = useAppSelector((state) => state.tabs.tabs);
+    const dispatch = useAppDispatch();
 
 
     return (
