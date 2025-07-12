@@ -1,7 +1,6 @@
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ITab } from '../../../services/types';
-import { ApplicationState } from '../../../services/store/store';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../../services/store/hook';
 
 interface BurgerTabItemProps {
     children: ITab;
@@ -9,7 +8,7 @@ interface BurgerTabItemProps {
 }
 
 export default function BurgerTabItem({ children, onActive }: BurgerTabItemProps) {
-    const activeTab = useSelector((state: ApplicationState) => state.tabs.activeTab);
+    const activeTab = useAppSelector((state) => state.tabs.activeTab);
 
     const onClick = () => {
         onActive(children.id);

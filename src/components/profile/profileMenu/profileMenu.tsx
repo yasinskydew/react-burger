@@ -1,12 +1,10 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './profileMenu.module.css';
 import { useLogoutMutation } from '../../../services/api/auth';
 import { TokenManager } from '../../../services/utils/tokenManager';
 import { Loader } from '../../loader/loader';
-import { useDispatch, useSelector } from 'react-redux';
-import { ApplicationState } from '../../../services/store/store';
 import { setUser } from '../../../services/reducers/user';
+import { useAppDispatch, useAppSelector } from '../../../services/store/hook';
 
 interface MenuItem {
   text: string;
@@ -16,8 +14,8 @@ interface MenuItem {
 
 export const ProfileMenu = () => {
   const [logout, { isLoading, isError }] = useLogoutMutation();
-  const { error } = useSelector((state: ApplicationState) => state.userSliceReducer);
-  const dispatch = useDispatch();
+  const { error } = useAppSelector((state) => state.userSliceReducer);
+  const dispatch = useAppDispatch();
 
   const handleLogout = async () => {
     await logout({ token: TokenManager.getRefreshToken() || '' })

@@ -1,8 +1,7 @@
-import { useDispatch, useSelector } from "react-redux";
 import { IIngredient } from "../../types";
-import { ApplicationState } from "../store";
 import { setIsIngredientModalOpenReducer } from "../../reducers/ingredients";
 import circle from '../../../images/ingridients/circle.svg';
+import { useAppDispatch, useAppSelector } from "../hook";
 
 interface UseIngredientsReturn {
   ingredients: IIngredient[];
@@ -44,9 +43,9 @@ export const defaultIngridient: IIngredient = {
 }
 
 export const useIngredients = (): UseIngredientsReturn => {
-  const dispatch = useDispatch();
-  const ingredients = useSelector((state: ApplicationState) => state.ingredients.items);
-  const isIngredientModalOpen = useSelector((state: ApplicationState) => state.ingredients.isIngredientModalOpen);
+  const dispatch = useAppDispatch();
+  const ingredients = useAppSelector((state) => state.ingredients.items);
+  const isIngredientModalOpen = useAppSelector((state) => state.ingredients.isIngredientModalOpen);
 
   const getIngridientsByType = (type: string) => ingredients.filter((ingredient) => ingredient.type === type);
 

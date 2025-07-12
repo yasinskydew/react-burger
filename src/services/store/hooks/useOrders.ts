@@ -1,13 +1,12 @@
-import { useDispatch, useSelector } from "react-redux"
-import { ApplicationState } from "../store";
 import { setIsOrderModalOpenReducer } from "../../reducers/orders";
 import { IIngredient } from "../../types";
+import { useAppDispatch, useAppSelector } from "../hook";
 
 export const useOrders = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const isOrderModalOpen = useSelector((state: ApplicationState) => state.orders.isOrderModalOpen);
-  const orders = useSelector((state: ApplicationState) => state.orders.orders);
+  const isOrderModalOpen = useAppSelector((state) => state.orders.isOrderModalOpen);
+  const orders = useAppSelector((state) => state.orders.orders);
 
   const setIsOrderModalOpen = (isOpen: boolean) => {
     dispatch(setIsOrderModalOpenReducer(isOpen));

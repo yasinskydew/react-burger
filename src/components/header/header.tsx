@@ -1,11 +1,10 @@
 import { BurgerIcon, ListIcon, ProfileIcon, Logo } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './header.module.css'
 import HeaderNavButton from './headerNavButton/headerNavButton';
-import { useSelector } from 'react-redux';
-import { ApplicationState } from '../../services/store/store';
+import { useAppSelector } from '../../services/store/hook';
 
 export default function AppHeader() {
-    const { user } = useSelector((state: ApplicationState) => state.userSliceReducer);
+    const { user } = useAppSelector((state) => state.userSliceReducer);
     return (
         <header className={styles.header}>
             <div className={styles.container}>

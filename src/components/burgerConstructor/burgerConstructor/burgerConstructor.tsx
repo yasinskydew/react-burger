@@ -10,21 +10,20 @@ import BurgerComponent from '../burgerComponent/burgerComponent';
 import { useDrop } from 'react-dnd';
 import { BurgerComponentType, DragItemTypes, IIngredient } from '../../../services/types';
 import { addIngridient, setBun } from '../../../services/reducers/order';
-import { useDispatch, useSelector } from 'react-redux';
 import { Loader } from '../../loader/loader';
-import { ApplicationState } from '../../../services/store/store';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { defaultIngridient } from '../../../services/store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../services/store/hook';
 
 export default function BurgerConstructor() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { items, totalPrice, createOrder, clearOrder } = useOrder();
-  const { user } = useSelector((state: ApplicationState) => state.userSliceReducer);
+  const { user } = useAppSelector((state) => state.userSliceReducer);
   const navigate = useNavigate();
   const location = useLocation();
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleOpenModal = async () => {
     if(!user) {

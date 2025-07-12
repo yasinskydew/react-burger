@@ -1,10 +1,8 @@
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
 import { IIngredient, IOrderPosition, IOrderResponse } from "../../types";
-import { ApplicationState } from "../store";
 import { setOrder, changePosition, clearOrderIngridients } from "../../reducers/order";
 import { useCreateOrderMutation } from "../../api/order";
 import { defaultBun } from "./useIngredients";
+import { useAppDispatch, useAppSelector } from "../hook";
 
 interface UseOrderReturn {
     items: IOrderPosition[];
@@ -17,8 +15,8 @@ interface UseOrderReturn {
 }
 
 export const useOrder = (): UseOrderReturn => {
-  const dispatch = useDispatch();
-  const { items, totalPrice, order, bun } = useSelector((state: ApplicationState) => state.order);
+  const dispatch = useAppDispatch();
+  const { items, totalPrice, order, bun } = useAppSelector((state) => state.order);
   const [createOrderMutation] = useCreateOrderMutation();
 
   const createOrder = async () => {

@@ -1,6 +1,6 @@
+import { useIngredients } from '../../../../services/store/hooks/useIngredients';
 import BurgerColumnItem from '../burgerColumnItem/burgerColumnItem'
 import styles from './burgerColumnList.module.css'
-import { useIngredients } from '../../../../services/store/hooks';
 
 interface IBurgerColumnListProps {
     type: string;

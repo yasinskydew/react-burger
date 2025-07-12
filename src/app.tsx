@@ -16,13 +16,12 @@ import { Loader } from './components/loader/loader';
 import { useGetIngridientsQuery } from './services/api/ingridient';
 import IngridientDetailsPage from './pages/ingridientDetails/ingredientDetailsPage';
 import { TokenManager } from './services/utils/tokenManager';
-import { useSelector } from 'react-redux';
-import { ApplicationState } from './services/store/store';
 import { useGetUserQuery } from './services/api/user';
 import IngredientModal from './components/burgerIngredients/ingridientModal/ingredientModal';
 import { FeedPage } from './pages/feed/feed';
 import OrderModal from './components/order/orderModal/orderModal';
 import { OrderContentPage } from './pages/orderContent/orderContentPage';
+import { useAppSelector } from './services/store/hook';
 
 export const App = () => {
   const location = useLocation();
@@ -30,7 +29,7 @@ export const App = () => {
   const isResetPassword = TokenManager.getIsResetPassword();
 
   const { data: ingredientsData, isLoading, isError } = useGetIngridientsQuery()
-  const { user } = useSelector((state: ApplicationState) => state.userSliceReducer);
+  const { user } = useAppSelector((state) => state.userSliceReducer);
   const { isLoading: isUserLoading, isError: isUserError } = useGetUserQuery(undefined, {
     skip: !TokenManager.getAccessToken() || !!user
   });

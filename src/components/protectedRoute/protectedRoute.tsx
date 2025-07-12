@@ -1,17 +1,15 @@
 import { Outlet, useLocation, Navigate } from "react-router";
 import { useState, useEffect } from "react";
-
-import { useSelector } from "react-redux";
-import { ApplicationState } from "../../services/store/store";
 import { TokenManager } from '../../services/utils/tokenManager';
 import { Loader } from "../loader/loader";
 import { useGetUserQuery } from "../../services/api/user";
 import { refreshToken } from "../../services/utils/api";
+import { useAppSelector } from "../../services/store/hook";
 
 export const ProtectedRoute = () => {
   const location = useLocation();
   const token = TokenManager.getAccessToken();
-  const { user } = useSelector((state: ApplicationState) => state.userSliceReducer);
+  const { user } = useAppSelector((state) => state.userSliceReducer);
   const { isLoading, isError } = useGetUserQuery(undefined, {
     skip: !token || !!user
   });
