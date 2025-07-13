@@ -1,7 +1,7 @@
 import BurgerPrice from '../../../burgerPrice/burgerPrice';
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './burgerColumnItem.module.css'
-import { IIngredient, DragItemTypes } from '../../../../services/types';
+import { IIngredient, DragItemTypes, IngredientType } from '../../../../services/types';
 import { useOrder } from '../../../../services/store/hooks/useOrder';
 import { useDrag } from 'react-dnd';
 import { useRef } from 'react';
@@ -39,6 +39,7 @@ export default function BurgerColumnItem({ ...ingredient }: BurgerColumnItemProp
             ref={dragRef} 
             style={{ opacity: isDrag ? 0.4 : 1 }}
             state={{ background: location }}
+            data-testid={ingredient.type === IngredientType.bun ? 'ingredient-bun' : 'ingredient-main'}
         >
             <img src={ingredient.image} alt={ingredient.name} />
             {getCount() > 0 && <Counter count={getCount()} size="default" />}

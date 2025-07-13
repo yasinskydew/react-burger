@@ -57,7 +57,7 @@ export default function BurgerConstructor() {
   return (
     <section className={styles.burgerConstructor}>
       <div className={styles.burgerConstructorContent} ref={dropRef}>
-        <BurgerComponent {...bun} name={bun.name + ' (верх)'} isLocked={true} index={0} positionType={BurgerComponentType.top}/>
+        <BurgerComponent {...bun} name={bun.name + ' (верх)'} isLocked={true} index={0} positionType={BurgerComponentType.top} dataTestid='burger-constructor-drop-bun'/>
         {
           Object.keys(items).length > 0 ? (
             <div className={styles.scrollableContent}>
@@ -65,7 +65,7 @@ export default function BurgerConstructor() {
             </div>
           ) : (
             <div className={styles.scrollableContent}>
-              <BurgerComponent {...defaultIngridient} name={defaultIngridient.name} isLocked={true} index={0} />
+              <BurgerComponent {...defaultIngridient} name={defaultIngridient.name} isLocked={true} index={0} dataTestid='burger-constructor-drop-main'/>
             </div>
           )
         }

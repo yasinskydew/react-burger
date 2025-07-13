@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from './modal.module.css'
 import ReactDOM from 'react-dom';
 import { useEffect } from 'react';
@@ -41,11 +42,11 @@ export default function Modal(props: ModalProps) {
 
     return ReactDOM.createPortal(
         <>
-            <ModalOverlay onClose={onClose} />
-            <div className={styles.modal}>
+            <ModalOverlay onClose={onClose} data-testid="modal-overlay" />
+            <div className={styles.modal} data-testid="modal">
                 <div className={styles.modal_header}>
                     <h2 className={titleStyle}>{title}</h2>
-                    <button className={styles.modal_close} onClick={onClose}><img src={closeIcon} alt="close" /></button>
+                    <button className={styles.modal_close} data-testid="modal-close" onClick={onClose}><img src={closeIcon} alt="close" /></button>
                 </div>
                 <div className={styles.modal_content}>
                     {children}
