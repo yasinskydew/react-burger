@@ -1,8 +1,7 @@
-import { useDispatch, useSelector } from "react-redux";
-import { IIngredient } from "../../types";
-import { ApplicationState } from "../store";
+import { IIngredient, IngredientType } from "../../types";
 import { setIsIngredientModalOpenReducer } from "../../reducers/ingredients";
 import circle from '../../../images/ingridients/circle.svg';
+import { useAppDispatch, useAppSelector } from "../hook";
 
 interface UseIngredientsReturn {
   ingredients: IIngredient[];
@@ -10,12 +9,13 @@ interface UseIngredientsReturn {
   getIngredientById: (id: string) => IIngredient | undefined;
   isIngredientModalOpen: boolean;
   setIsIngredientModalOpen: (isOpen: boolean) => void;
+  getIngredientListByIds: (ingredientIds: string[]) => IIngredient[]
 }
 
 export const defaultBun: IIngredient = {
   _id: '0',
   name: 'Пожалуйста, перенесите сюда булку',
-  type: 'defaultBun',
+  type: IngredientType.bun,
   proteins: 0,
   fat: 0,
   carbohydrates: 0,
@@ -30,7 +30,7 @@ export const defaultBun: IIngredient = {
 export const defaultIngridient: IIngredient = {
   _id: '1',
   name: 'Пожалуйста, перенесите сюда ингридиент',
-  type: 'defaultIngridient',
+  type: IngredientType.main,
   proteins: 0,
   fat: 0,
   carbohydrates: 0,
@@ -43,9 +43,9 @@ export const defaultIngridient: IIngredient = {
 }
 
 export const useIngredients = (): UseIngredientsReturn => {
-  const dispatch = useDispatch();
-  const ingredients = useSelector((state: ApplicationState) => state.ingredients.items);
-  const isIngredientModalOpen = useSelector((state: ApplicationState) => state.ingredients.isIngredientModalOpen);
+  const dispatch = useAppDispatch();
+  const ingredients = useAppSelector((state) => state.ingredients.items);
+  const isIngredientModalOpen = useAppSelector((state) => state.ingredients.isIngredientModalOpen);
 
   const getIngridientsByType = (type: string) => ingredients.filter((ingredient) => ingredient.type === type);
 
@@ -54,12 +54,19 @@ export const useIngredients = (): UseIngredientsReturn => {
   const setIsIngredientModalOpen = (isOpen: boolean) => {
     dispatch(setIsIngredientModalOpenReducer(isOpen));
   }
+
+  const getIngredientListByIds = (ingredientIds: string[]): IIngredient[] => {
+    return ingredientIds
+      .map((id: string) => getIngredientById(id))
+      .filter((ingredient): ingredient is IIngredient => Boolean(ingredient));
+  }
   
   return { 
     ingredients, 
     isIngredientModalOpen, 
     getIngridientsByType, 
     getIngredientById, 
-    setIsIngredientModalOpen 
+    setIsIngredientModalOpen,
+    getIngredientListByIds
   };
 }

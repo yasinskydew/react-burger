@@ -4,9 +4,8 @@ import styles from './registerPage.module.css';
 import { useRef, useState } from "react";
 import { useRegisterMutation } from "../../services/api/auth";
 import { Loader } from "../../components/loader/loader";
-import { useSelector } from "react-redux";
-import { ApplicationState } from "../../services/store/store";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../../services/store/hooks/useUser";
 
 export const RegisterPage = () => {
   const [email, setEmail] = useState('');
@@ -16,7 +15,7 @@ export const RegisterPage = () => {
   const [nameError, setNameError] = useState(false);
 
   const [register, { isLoading, isError }] = useRegisterMutation();
-  const { error } = useSelector((state: ApplicationState) => state.userSliceReducer);
+  const { error } = useUser()
   const navigate = useNavigate();
   
   const links = [

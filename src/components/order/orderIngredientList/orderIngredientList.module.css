@@ -1,0 +1,38 @@
+.listContainer {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 40px;
+  margin-right: 24px;
+}
+
+.ingredientItem {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+}
+
+.scrollableContent {
+  overflow-y: auto;
+  max-height: 308px;
+  padding-right: 8px;
+}
+
+.scrollableContent::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollableContent::-webkit-scrollbar-track {
+  background: #2F2F37;
+}
+
+.scrollableContent::-webkit-scrollbar-thumb {
+  background: #8585AD;
+  border: 3px solid #8585AD;
+  border-radius: 6px;
+}
+

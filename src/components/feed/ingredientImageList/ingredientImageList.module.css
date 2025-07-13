@@ -1,0 +1,48 @@
+.list {
+  display: flex;
+  position: relative;
+}
+
+.circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(63.18deg, #801AB3 0%, #4C4CFF 100%);
+  margin-left: -24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle:first-child {
+  margin-left: 0;
+}
+
+.innerCircle {
+  background: #131316;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image {
+  width: 90%;
+  height: 90%;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(24, 24, 27, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} 

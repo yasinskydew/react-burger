@@ -1,0 +1,23 @@
+.feedDashboardStatusList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.feedDashboardStatusListDone {
+  color: #00CCCC;
+}
+
+.feedDashboardStatusListPending {
+  color: white;
+}
+
+.feedDashboardStatusListCreated {
+  color: goldenrod;
+}
+
+
+.feedDashboardColumnList {
+  display: flex;
+  gap: 8px;
+}
