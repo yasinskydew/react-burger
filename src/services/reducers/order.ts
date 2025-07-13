@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { IIngredient, IOrderPosition, IOrderResponse } from "../types";
+import crypto from 'crypto';
 
 interface IOrderState {
     items: IOrderPosition[];
