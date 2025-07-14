@@ -5,15 +5,11 @@ import orderReducer, {
   setBun,
   setOrder,
   changePosition,
+  initialState,
 } from './order';
 import { IngredientType } from '../types';
 
-const getInitialState = () => ({
-  items: [],
-  bun: null,
-  totalPrice: 0,
-  order: null,
-});
+
 
 const getBun = () => ({
   _id: 'bun1',
@@ -54,17 +50,17 @@ const getOrderResponse = () => ({
 
 describe('order reducer', () => {
   it('returns the initial state / возвращает начальное состояние', () => {
-    expect(orderReducer(undefined, { type: '' })).toEqual(getInitialState());
+    expect(orderReducer(undefined, { type: '' })).toEqual(initialState);
   });
 
   it('handles addIngridient / обрабатывает addIngridient', () => {
-    const state = orderReducer(getInitialState(), addIngridient(getIngredient()));
+    const state = orderReducer(initialState, addIngridient(getIngredient()));
     expect(state.items.length).toBe(1);
     expect(state.totalPrice).toBe(5);
   });
 
   it('handles removeIngridient / обрабатывает removeIngridient', () => {
-    const stateWithItem = orderReducer(getInitialState(), addIngridient(getIngredient()));
+    const stateWithItem = orderReducer(initialState, addIngridient(getIngredient()));
     const state = orderReducer(
       stateWithItem,
       removeIngridient({ ...stateWithItem.items[0] })
@@ -74,7 +70,7 @@ describe('order reducer', () => {
   });
 
   it('handles clearOrderIngridients / обрабатывает clearOrderIngridients', () => {
-    const stateWithItem = orderReducer(getInitialState(), addIngridient(getIngredient()));
+    const stateWithItem = orderReducer(initialState, addIngridient(getIngredient()));
     const state = orderReducer(stateWithItem, clearOrderIngridients());
     expect(state.items.length).toBe(0);
     expect(state.bun).toBeNull();
@@ -82,18 +78,18 @@ describe('order reducer', () => {
   });
 
   it('handles setBun / обрабатывает setBun', () => {
-    const state = orderReducer(getInitialState(), setBun(getBun()));
+    const state = orderReducer(initialState, setBun(getBun()));
     expect(state.bun).toEqual(getBun());
     expect(state.totalPrice).toBe(20);
   });
 
   it('handles setOrder / обрабатывает setOrder', () => {
-    const state = orderReducer(getInitialState(), setOrder(getOrderResponse()));
+    const state = orderReducer(initialState, setOrder(getOrderResponse()));
     expect(state.order).toEqual(getOrderResponse());
   });
 
   it('handles changePosition / обрабатывает changePosition', () => {
-    let state = orderReducer(getInitialState(), addIngridient(getIngredient()));
+    let state = orderReducer(initialState, addIngridient(getIngredient()));
     state = orderReducer(
       state,
       addIngridient(getIngredient({ _id: 'ing2', name: 'Ing2' }))

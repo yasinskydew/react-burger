@@ -1,11 +1,5 @@
-import tabsReducer, { selectActiveTab } from './tabs';
+import tabsReducer, { selectActiveTab, initialState } from './tabs';
 import { getTabs } from '../types';
-
-const initialState = {
-  tabs: getTabs(),
-  activeTab: getTabs()[0],
-};
-
 describe('tabs reducer', () => {
   it('should return the initial state', () => {
     expect(tabsReducer(undefined, { type: '' })).toEqual(initialState);

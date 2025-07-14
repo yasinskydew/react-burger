@@ -1,12 +1,5 @@
-import ingredientsReducer, { setIsIngredientModalOpenReducer } from './ingredients';
+import ingredientsReducer, { setIsIngredientModalOpenReducer, initialState } from './ingredients';
 import { inigridientApiSlice } from '../api/ingridient';
-
-const initialState = {
-  items: [],
-  loading: false,
-  error: null,
-  isIngredientModalOpen: false,
-};
 
 const reducerPath = inigridientApiSlice.reducerPath || 'api';
 const endpointName = 'getIngridients';

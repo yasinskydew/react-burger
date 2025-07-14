@@ -10,7 +10,7 @@ interface IOrderState {
     order: IOrderResponse | null;
 }
 
-const initialState: IOrderState = {
+export const initialState: IOrderState = {
     items: [],
     bun: null,
     totalPrice: 0,

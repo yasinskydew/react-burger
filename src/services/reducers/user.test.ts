@@ -1,4 +1,4 @@
-import userReducer, { setUser, logout } from './user';
+import userReducer, { setUser, logout, initialState } from './user';
 
 jest.mock('../utils/tokenManager', () => ({
   TokenManager: {
@@ -8,11 +8,6 @@ jest.mock('../utils/tokenManager', () => ({
     deleteRefreshToken: jest.fn(),
   },
 }));
-
-const initialState = {
-  user: null,
-  error: null,
-};
 
 describe('user reducer', () => {
   it('should return the initial state', () => {
