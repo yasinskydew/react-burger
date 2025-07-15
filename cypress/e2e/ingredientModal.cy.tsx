@@ -1,19 +1,20 @@
 describe('Ingredient Modal', () => {
+  const ingredientBun = '[data-testid="ingredient-bun"]'
   beforeEach(() => {
     cy.visit('/');
   })
 
   it('Contain ingredients', () => {
-    cy.get('[data-testid="ingredient-bun"]').should('have.length.at.least', 1);
+    cy.get(ingredientBun).should('have.length.at.least', 1);
   });
 
   it('Contain ingredients', () => {
-    cy.get('[data-testid="ingredient-bun"]').first().click()
+    cy.get(ingredientBun).first().click()
     
   });
 
   it('Opens ingredient modal and checks content', () => {
-    cy.get('[data-testid="ingredient-bun"]').first().click();
+    cy.get(ingredientBun).first().click();
     cy.get('h2').contains('Детали ингредиента').should('be.visible');
     cy.get('img').should('exist');
     cy.contains('Калории').should('be.visible');
@@ -23,7 +24,7 @@ describe('Ingredient Modal', () => {
   });
 
   it('close modal for close btn click', () => {
-    cy.get('[data-testid="ingredient-bun"]').first().click();
+    cy.get(ingredientBun).first().click();
     cy.get('h2').contains('Детали ингредиента').should('be.visible');
     cy.get('img').should('exist');
     cy.contains('Калории').should('be.visible');

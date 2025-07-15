@@ -4,6 +4,7 @@ import {
 } from '../support/cssModulesHelper';
 
 describe('Header Component', () => {
+  const headerNavButton = '[data-testid="header-nav-button"]'
   beforeEach(() => {
     cy.visit('/');
   });
@@ -18,7 +19,7 @@ describe('Header Component', () => {
   });
 
   it('contains navigation buttons', () => {
-    cy.get('[data-testid="header-nav-button"]').should('have.length.at.least', 3);
+    cy.get(headerNavButton).should('have.length.at.least', 3);
   });
 
   it('displays correct links', () => {
@@ -43,8 +44,8 @@ describe('Header Component', () => {
   });
 
   it('navigation buttons work', () => {
-    cy.get('[data-testid="header-nav-button"]').first().should('be.visible');
-    cy.get('[data-testid="header-nav-button"]').first().click();
+    cy.get(headerNavButton).first().should('be.visible');
+    cy.get(headerNavButton).first().click();
     cy.url().should('include', '/');
   });
 }); 
