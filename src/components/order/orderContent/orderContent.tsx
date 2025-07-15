@@ -43,7 +43,7 @@ export const OrderContent = (props: OrderContentProps) => {
             styles.orderContentPageTitle,
             'text', 
             'text_type_digits-default',
-          ].join(' ')}>{`#${number}`}</h2>
+          ].join(' ')} data-testid="order-number">{`#${number}`}</h2>
         }
         <h2 className={styles.orderContentName + ' text text_type_main-medium'}>{name}</h2>
         <p className={[statusClasses[status]] + ' text text_type_main-default'}>{OrdersStatusTranslates[status]}</p>

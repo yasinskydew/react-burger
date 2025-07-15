@@ -9,7 +9,7 @@ interface IngredientsState {
   isIngredientModalOpen: boolean;
 }
 
-const initialState: IngredientsState = {
+export const initialState: IngredientsState = {
   items: [],
   loading: false,
   error: null,

@@ -9,7 +9,8 @@ export interface BurgerComponentProps extends IIngredient {
   positionType?: BurgerComponentType
   isLocked: boolean
   handleClose?: () => void
-  index: number
+  index: number,
+  dataTestid?: string
 }
 
 export default function BurgerComponent({ 
@@ -20,6 +21,7 @@ export default function BurgerComponent({
   isLocked,
   handleClose,
   index,
+  dataTestid,
 }: BurgerComponentProps) {
   const { changePosition } = useOrder();
   const dragRef = useRef<HTMLDivElement>(null);
@@ -46,7 +48,7 @@ export default function BurgerComponent({
   drag(drop(dragRef));
 
   return (
-    <article className={styles.burger_component} ref={isLocked ? null : dragRef} style={{ opacity: isDrag ? 0.4 : 1 }}>
+    <article className={styles.burger_component} ref={isLocked ? null : dragRef} style={{ opacity: isDrag ? 0.4 : 1 }} data-testid={dataTestid} >
       {!isLocked ? <DragIcon type="primary" /> : <div/>}
       <ConstructorElement 
           text={name} 

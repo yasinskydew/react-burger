@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { IIngredient, IOrderPosition, IOrderResponse } from "../types";
+import { v4 as uuidv4 } from 'uuid';
 
 interface IOrderState {
     items: IOrderPosition[];
@@ -9,7 +10,7 @@ interface IOrderState {
     order: IOrderResponse | null;
 }
 
-const initialState: IOrderState = {
+export const initialState: IOrderState = {
     items: [],
     bun: null,
     totalPrice: 0,
@@ -23,7 +24,7 @@ const orderSlice = createSlice({
         addIngridient: (state, action: PayloadAction<IIngredient>) => {
             state.items.push({
                 ...action.payload,
-                id: crypto.randomUUID(),
+                id: uuidv4(),
                 orderPosition: state.items.length + 1
             });
             state.totalPrice += action.payload.price;

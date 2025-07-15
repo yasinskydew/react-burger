@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { getTabs } from "../types";
 
-const initialState = {
+export const initialState = {
   tabs: getTabs(),
   activeTab: getTabs()[0],
 }

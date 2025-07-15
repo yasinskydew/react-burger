@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from './ingridientNutrition.module.css';
 import { IIngredient } from '../../../services/types';
 import IngridientNutritionItem from './ingridientNutritionItem';

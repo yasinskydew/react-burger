@@ -1,5 +1,5 @@
+import React from 'react';
 import styles from './ingridientNutrition.module.css';
-
 interface IngridientNutritionItemProps {
     title: string;
     value: string;
